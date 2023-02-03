@@ -4,22 +4,24 @@ using UnityEngine;
 
 public class RacketMove : MonoBehaviour
 {
-    public float speed;
-    float distance = 10;
+    //public float speed;
+    Vector3 mousePos;
+    float movey;
 
-    void OnMouseDrag()
+    private void Start()
     {
-        print("Drag!!");
-        Vector3 mousePosition = new Vector3(Input.mousePosition.x,Input.mousePosition.y, distance);
-        Vector3 objPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        transform.position = objPosition;
+        mousePos = Input.mousePosition;
     }
 
 
 
     private void FixedUpdate()
     {
-        float v = Input.GetAxisRaw("Vertical");
-        GetComponent<Rigidbody2D>().velocity = new Vector2(0, v) * speed;
+        //float v = Input.GetAxisRaw("Vertical");
+        //GetComponent<Rigidbody2D>().velocity = new Vector2(0, v) * speed;
+
+        movey = Input.mousePosition.y; 
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0, -(mousePos.y - movey));
+        mousePos = Input.mousePosition;
     }
 }

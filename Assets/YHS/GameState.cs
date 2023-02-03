@@ -13,7 +13,7 @@ public class GameState : MonoBehaviour
         time += Time.deltaTime;
         if(time>=3f)
         {
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
             Debug.Log("클리어");
             time = 0f;
         }
@@ -24,7 +24,7 @@ public class GameState : MonoBehaviour
     {
         if(col.gameObject.name=="ball")
         {
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
             Debug.Log("실패");
         }
     }

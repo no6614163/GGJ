@@ -314,7 +314,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 141709684}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 919.02, y: 429.58, z: 0}
+  m_LocalPosition: {x: 919.02, y: 429.82, z: 0}
   m_LocalScale: {x: 0.291924, y: 1.090706, z: 0.89393}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -380,7 +380,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89885dea7540eb5459943bca9fa648b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
 --- !u!1 &276987111
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,6 +823,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1306385342
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1306385344}
+  - component: {fileID: 1306385343}
+  m_Layer: 0
+  m_Name: Pong
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1306385343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1306385342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4d1d7ee1d3ea934dbb47c324c2e551a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1306385344
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1306385342}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 922.5961, y: 429.64148, z: -0.036934156}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1638308985
 GameObject:
   m_ObjectHideFlags: 0
@@ -1077,14 +1120,13 @@ GameObject:
   - component: {fileID: 1853332240}
   - component: {fileID: 1853332239}
   - component: {fileID: 1853332238}
-  - component: {fileID: 1853332242}
   m_Layer: 0
   m_Name: RacketR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &1853332238
 Rigidbody2D:
   serializedVersion: 4
@@ -1192,26 +1234,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1853332237}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 926.44, y: 429.58, z: 0}
-  m_LocalScale: {x: 0.29192403, y: 1.0907061, z: 0.89393}
+  m_LocalPosition: {x: 926.44, y: 429.68, z: 0}
+  m_LocalScale: {x: 0.29192403, y: 1.1678648, z: 0.89393}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1853332242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1853332237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89885dea7540eb5459943bca9fa648b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 15
 --- !u!1 &1940001034
 GameObject:
   m_ObjectHideFlags: 0
