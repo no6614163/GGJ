@@ -37,7 +37,7 @@ public class UI_Start : UI_Scene
     void OnButtonClickedStart(PointerEventData evt)
     {
         Debug.Log("Start");
-        //SceneManager.LoadScene((int)Scene.Lobby);
+        GameSystem.Instance.LoadScene((int)SceneType.Lobby);
     }
 
     void OnButtonClickedSettings(PointerEventData evt)

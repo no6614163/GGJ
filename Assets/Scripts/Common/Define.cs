@@ -12,7 +12,7 @@
 
 }
 
-public enum Scene
+public enum SceneType
 {
     Start,
     Lobby,
