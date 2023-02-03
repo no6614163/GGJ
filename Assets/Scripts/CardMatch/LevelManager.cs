@@ -127,10 +127,12 @@ namespace CardMatch
         void OnTimeOut()
         {
             Debug.Log("제한시간 초과로 패배!");
+            UI_Manager.Instance.ShowPopupUI<UI_FailedPopup>();
         }
         void OnGameClear()
         {
             Debug.Log("게임 클리어!");
+            UI_Manager.Instance.ShowPopupUI<UI_ClearPopup>();
         }
     }
 }
