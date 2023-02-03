@@ -18,7 +18,6 @@ public class UI_ClearPopup : UI_Popup
         Text_Stage3,
         Text_Stage4,
         Text_Stage5,
-
     }
 
     enum Images
@@ -36,6 +35,7 @@ public class UI_ClearPopup : UI_Popup
         Get<Image>((int)Images.Image_NextStage).gameObject.BindEvent(OnButtonClickedNextStage);
         PlayAnimation();
     }
+
     void PlayAnimation()
     {
         // TODO : 애니메이션 실행
@@ -53,14 +53,9 @@ public class UI_ClearPopup : UI_Popup
         // TODO : 애니메이션들 넣어주면 좋음.
         Debug.Log("Next Stage");
         // TODO : 다음 스테이지 입력 해주는게 맞음. 스테이지 자체는 랜덤으로
+        // 씬 호출 전에 gamesystem에서 현재 스테이지 바꿔주기
+        GameSystem.Instance.SetNextStage();
         GameSystem.Instance.LoadScene((int)SceneType.Lobby);
-    }
-
-    public void SetScore(int stage, int score)
-    {
-        // NOTE : 이거 임시
-        // TODO :애니메이션 text 넣어줘야됨.
-        
     }
 
 }

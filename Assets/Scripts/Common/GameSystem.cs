@@ -47,6 +47,14 @@ public class GameSystem : Singleton<GameSystem>
         ScoreArray[CurrentStage-1] = score;
     }
 
+    public void SetNextDay()
+    {
+        Day++;
+        // TODO : 해피포인트, 푸드포인트 -10씩 줄어들기?
+        SetHappyPoint(-10);
+        SetFoodPoint(-10);
+    }
+
     public void SetNextStage()
     {
         CurrentStage++;
