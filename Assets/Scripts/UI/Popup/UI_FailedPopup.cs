@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -33,19 +32,6 @@ public class UI_FailedPopup : UI_Popup
 
 
         Get<Image>((int)Images.Image_Out).gameObject.BindEvent(OnButtonClickedOut);
-        PlayAnimation();
-    }
-    void PlayAnimation()
-    {
-        // TODO :스코어 등 출력 애니메이션 추가
-        Debug.Log("failed 애니메이션 실행");
-        for (int i = 0; i < Constants.MaxStageCount; i++)
-        {
-            int score = GameSystem.Instance.ScoreArray[i];
-            if (score == null)
-                score = -1;
-            Get<TMP_Text>((int)Texts.Text_Stage + i + 1).text = string.Format("Stage {0} : {1}", i + 1, score);
-        }
     }
 
     void OnButtonClickedOut(PointerEventData evt)
@@ -60,6 +46,10 @@ public class UI_FailedPopup : UI_Popup
     {
         // NOTE : 이거 임시
         // TODO :애니메이션 text 넣어줘야됨.
+        if(success)
+            Get<TMP_Text>((int)Texts.Text_Stage + stage).text = string.Format("Stage {0} : {1}", stage, score);
+        else
+            Get<TMP_Text>((int)Texts.Text_Stage + stage).text = string.Format("Stage {0} : Failed", stage, score);
     }
 
 }

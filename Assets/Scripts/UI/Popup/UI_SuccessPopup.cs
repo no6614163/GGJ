@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -30,22 +29,9 @@ public class UI_SuccessPopup : UI_Popup
         base.Init();
         Bind<TMP_Text>(typeof(Texts));
         Bind<Image>(typeof(Images));
+        
+
         Get<Image>((int)Images.Image_Out).gameObject.BindEvent(OnButtonClickedOut);
-
-        PlayAnimation();
-    }
-
-    void PlayAnimation()
-    {
-        // TODO :스코어 등 출력 애니메이션 추가
-        Debug.Log("Success 애니메이션 실행");
-        for (int i = 0; i < Constants.MaxStageCount; i++)
-        {
-            int score = GameSystem.Instance.ScoreArray[i];
-            if (score == null)
-                score = -1;
-            Get<TMP_Text>((int)Texts.Text_Stage + i+1).text = string.Format("Stage {0} : {1}", i+1, score);
-        }
     }
 
     void OnButtonClickedOut(PointerEventData evt)
@@ -54,6 +40,13 @@ public class UI_SuccessPopup : UI_Popup
         Debug.Log("Out");
         // TODO : 로비로 이동하는 이벤트 + 점수 정산
         GameSystem.Instance.LoadScene((int)SceneType.Lobby);
+    }
+
+    public void SetScore(int stage, int score)
+    {
+        // NOTE : 이거 임시
+        // TODO :애니메이션 text 넣어줘야됨.
+        Get<TMP_Text>((int)Texts.Text_Stage + stage).text = string.Format("Stage {0} : {1}", stage, score);
     }
 
 }

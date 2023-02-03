@@ -10,25 +10,11 @@ public class GameSystem : Singleton<GameSystem>
     public int FoodPoint { get; private set; }
 
     public int Day { get; private set; }
-    public int[] ScoreArray { get; private set; }
-    public int CurrentStage { get; private set; }
 
-    void Awake()
-    {
-        CurrentStage = 1;
-        ScoreArray = new int[Constants.MaxStageCount];
-    }
-
-    public void InitGameSystem()
-    {
-        CurrentStage = 1;
-        ScoreArray = new int[Constants.MaxStageCount];
-    }
 
 
     public void SetGold(int gold)
     {
-        
         Gold += gold;
     }
 
@@ -40,15 +26,6 @@ public class GameSystem : Singleton<GameSystem>
     public void SetFoodPoint(int foodPoint)
     {
         FoodPoint += foodPoint;
-    }
-
-    /// <summary>
-    /// 점수 등록 
-    /// </summary>
-    /// <param name="stage"> 몇번째 스테이지인지 </param>
-    public void SetScore(int stage, int score)
-    {
-        ScoreArray[stage - 1] = score;
     }
 
     /// <summary>
