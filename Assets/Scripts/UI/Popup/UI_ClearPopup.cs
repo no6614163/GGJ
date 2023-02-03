@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class UI_ClearPopup : UI_Popup
@@ -32,6 +34,18 @@ public class UI_ClearPopup : UI_Popup
 
 
         Get<Image>((int)Images.Image_NextStage).gameObject.BindEvent(OnButtonClickedNextStage);
+        PlayAnimation();
+    }
+    void PlayAnimation()
+    {
+        // TODO : 애니메이션 실행
+        int stage = GameSystem.Instance.CurrentStage;
+        // NOTE : 스코어 등록이 선행되어야함.
+        Get<TMP_Text>((int)Texts.Text_Stage).text = string.Format("Stage {0} : {1}", stage, GameSystem.Instance.ScoreArray[stage-1]);
+        //if (success)
+        //    Get<TMP_Text>((int)Texts.Text_Stage + stage).text = string.Format("Stage {0} : {1}", stage, score);
+        //else
+        //    Get<TMP_Text>((int)Texts.Text_Stage + stage).text = string.Format("Stage {0} : Failed", stage, score);
     }
 
     void OnButtonClickedNextStage(PointerEventData evt)
@@ -46,7 +60,7 @@ public class UI_ClearPopup : UI_Popup
     {
         // NOTE : 이거 임시
         // TODO :애니메이션 text 넣어줘야됨.
-        Get<TMP_Text>((int)Texts.Text_Stage + stage).text = string.Format("Stage {0} : {1}", stage, score);
+        
     }
 
 }
