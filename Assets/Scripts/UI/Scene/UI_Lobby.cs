@@ -66,7 +66,8 @@ public class UI_Lobby : UI_Scene
         Debug.Log("Start");
         GameSystem.Instance.SetNextDay();
         // TODO : 랜덤으로 씬 타입 정한 후 게임 시작
-        //GameSystem.Instance.LoadScene((int)SceneType.Lobby);
+        int rand = Random.Range(2, 4);
+        GameSystem.Instance.LoadScene(rand);
     }
 
     void OnButtonClickedSettings(PointerEventData evt)
