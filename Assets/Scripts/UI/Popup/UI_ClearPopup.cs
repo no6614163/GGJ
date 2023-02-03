@@ -11,6 +11,12 @@ public class UI_ClearPopup : UI_Popup
     {
         Text_Success,
         Text_Stage,
+        Text_Stage1,
+        Text_Stage2,
+        Text_Stage3,
+        Text_Stage4,
+        Text_Stage5,
+
     }
 
     enum Images
