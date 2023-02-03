@@ -5,17 +5,25 @@ using UnityEngine.UI;
 
 public class GameState : MonoBehaviour
 {
-    private float time = 0f;
-
+    public float TimeLimit = 20f;
+    public float time = 0f;
+    private bool m_End = false;
 
     private void Update()
     {
+        if (m_End)
+            return;
+
         time += Time.deltaTime;
-        if(time>=3f)
+        if(time >= TimeLimit)
         {
             //Time.timeScale = 0;
             Debug.Log("클리어");
+            m_End = true;
             time = 0f;
+            // TODO : 현재 스테이지 확인 후 마지막 스테이지인 경우 succeess 호출 해줘야됨.
+            // UI_Manager.Instance.ShowPopupUI<UI_ClearPopup>();
+            // UI_Manager.Instance.ShowPopupUI<UI_SuccessPopup>();
         }
 
     }
@@ -26,6 +34,7 @@ public class GameState : MonoBehaviour
         {
             //Time.timeScale = 0;
             Debug.Log("실패");
+            UI_Manager.Instance.ShowPopupUI<UI_FailedPopup>();
         }
     }
 
