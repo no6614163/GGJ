@@ -639,9 +639,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: fe3143dd40eef5841b2706856f26e586, type: 3}
   rowCount: 4
   colCount: 4
-  TimeLimit: 0
-  InitialShowingTime: 0
-  CardShowDuration: 1
+  TimeLimit: 20
+  InitialShowingTime: 1
+  CardShowDuration: 0.5
 --- !u!4 &1663775131
 Transform:
   m_ObjectHideFlags: 0
