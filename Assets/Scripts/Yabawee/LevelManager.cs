@@ -10,7 +10,10 @@ namespace Yabawee
         float cupYPos;
         float itemYPos;
 
+        CupBehaviour chosenCup = null;
+
         Vector2[] handOriginalPos = new Vector2[2];
+        Vector2[] cupOriginalPos;
 
         CupBehaviour[] cups;
         [SerializeField] Hand [] hands;
@@ -22,7 +25,10 @@ namespace Yabawee
         GameConfig config;
         public GameConfig Config { get { return config; } }
 
-
+        public void OnCupClicked(CupBehaviour cup)
+        {
+            chosenCup = cup;
+        }
         private void Awake()
         {
             //TODO : config 변경
@@ -32,6 +38,7 @@ namespace Yabawee
         }
         void InitGame()
         {
+            cupOriginalPos = new Vector2[config.CupCount];
             cupYPos = referenceCup.anchoredPosition.y;
             itemYPos = item.RectTransform.anchoredPosition.y;
             cups = new CupBehaviour[config.CupCount];
@@ -40,8 +47,10 @@ namespace Yabawee
             {
                 CupBehaviour newCup = Instantiate(cupPrefab, showStage);
                 cups[i] = newCup;
+                newCup.Init(this, i);
                 float x = leftmostX + i * config.CupSpacing;
                 newCup.RectTransform.anchoredPosition = new Vector2(x, cupYPos);
+                cupOriginalPos[i] = new Vector2(x, cupYPos);
             }
             currentItemIndex = Random.Range(0, config.CupCount);
             item.RectTransform.anchoredPosition = new Vector2(cups[currentItemIndex].RectTransform.anchoredPosition.x, itemYPos);
@@ -61,8 +70,11 @@ namespace Yabawee
         {
             float handMoveDuration = 1f;
             float[] dur = new float[] { 0.3f, 0.4f, 0.3f };
+            foreach (var cup in cups)
+                cup.Clickable = false;
             for(int i=0; i<config.CupCount; i+=2)
             {
+                ArrangeHands();
                 //컵쪽으로 손 감
                 StartCoroutine(GrabCup(hands[0], i, handMoveDuration * dur[0]));
                 if (i+1 < config.CupCount)
@@ -72,8 +84,11 @@ namespace Yabawee
                 StartCoroutine(CupToFront(i, handMoveDuration * dur[1], handMoveDuration * dur[2]));
                 if (i + 1 < config.CupCount)
                     StartCoroutine(CupToFront(i+1, handMoveDuration * dur[1], handMoveDuration * dur[2]));
-                yield return new WaitForSeconds(handMoveDuration * (1-dur[0]));
+                yield return new WaitForSeconds(handMoveDuration * (dur[1] + dur[2]));
+                hands[0].transform.SetAsLastSibling();
+                hands[1].transform.SetAsLastSibling();
             }
+
             item.gameObject.SetActive(false);
             //섞기
             int[] indicies = new int[config.CupCount];
@@ -81,24 +96,98 @@ namespace Yabawee
                 indicies[i] = i;
             for (int i=0; i<config.ShufflePerRound[round]; i++)
             {
+                ArrangeHands();
                 int[] shuffleTargets = HappyUtils.Random.RandomElements(indicies, 2);
                 if (currentItemIndex == shuffleTargets[0])
-                    currentItemIndex = shuffleTargets[0];
-                else if (currentItemIndex == shuffleTargets[1])
                     currentItemIndex = shuffleTargets[1];
+                else if (currentItemIndex == shuffleTargets[1])
+                    currentItemIndex = shuffleTargets[0];
                 yield return StartCoroutine(Shuffle(new int[]{ shuffleTargets[0], shuffleTargets[1]}));
                 if (i < config.ShufflePerRound[round] - 1)
                     yield return new WaitForSeconds(config.ShuffleInterval);
             }
             item.gameObject.SetActive(true);
-            //손 원래 자리로
-            StartCoroutine(MoveHand(hands[0], handOriginalPos[0], handMoveDuration));
-            StartCoroutine(MoveHand(hands[1], handOriginalPos[1], handMoveDuration));
+            item.transform.SetAsFirstSibling();
+            yield return StartCoroutine(ReturnHands());
+
+            foreach (var cup in cups)
+                cup.Clickable = true;
+
+            //플레이어가 선택
+            while (chosenCup == null)
+                yield return null;
+
+            if(chosenCup.ID == currentItemIndex)
+                OnCorrect();
+            else
+                OnWrong();
+
+            foreach (var cup in cups)
+                cup.Clickable = false;
+            yield return new WaitForSeconds(0.5f);
+            int hand = GetCloseHandIndex(chosenCup);
+            item.gameObject.SetActive(true);
+            yield return StartCoroutine(GrabCup(hands[hand], chosenCup.ID, handMoveDuration * dur[0]));
+            yield return StartCoroutine(CupToBack(chosenCup.ID, handMoveDuration * dur[1], handMoveDuration * dur[2]));
+
+            yield return new WaitForSeconds(1f);
+            List<int> leftCups = new List<int>();
+            for(int i=0; i<config.CupCount; i++)
+            {
+                if (i == chosenCup.ID) continue;
+                leftCups.Add(i);
+            }
+            for (int i = 0; i < leftCups.Count; i += 2)
+            {
+                ArrangeHands();
+                //컵쪽으로 손 감
+                StartCoroutine(GrabCup(hands[0], leftCups[i], handMoveDuration * dur[0]));
+                if (i + 1 < leftCups.Count)
+                    StartCoroutine(GrabCup(hands[1], leftCups[i + 1], handMoveDuration * dur[0]));
+                yield return new WaitForSeconds(handMoveDuration * dur[0]);
+                //컵 앞으로 놓음
+                StartCoroutine(CupToBack(leftCups[i], handMoveDuration * dur[1], handMoveDuration * dur[2]));
+                if (i + 1 < leftCups.Count)
+                    StartCoroutine(CupToBack(leftCups[i + 1], handMoveDuration * dur[1], handMoveDuration * dur[2]));
+                yield return new WaitForSeconds(handMoveDuration * (1 - dur[0]));
+            }
+            yield return StartCoroutine(ReturnHands());
+        }
+
+        void ArrangeHands()
+        {
+            if (hands[0].RectTransform.anchoredPosition.x > hands[1].RectTransform.anchoredPosition.x)
+            {
+                var t = hands[0];
+                hands[0] = hands[1];
+                hands[1] = t;
+            }
+        }
+        IEnumerator ReturnHands(float duration = 1f)
+        {
+            ArrangeHands();
+            StartCoroutine(MoveHand(hands[0], handOriginalPos[0], duration));
+            yield return StartCoroutine(MoveHand(hands[1], handOriginalPos[1], duration));
+        }
+        void OnCorrect()
+        {
+            Debug.Log("정답!");
+        }
+        void OnWrong()
+        {
+            Debug.Log("OnWrong!");
         }
         IEnumerator CupToFront(int cupIndex, float duration1, float duration2)
         {
-            yield return StartCoroutine(MoveCup(cupIndex, cups[cupIndex].RectTransform.anchoredPosition + new Vector2(0,20),duration1));
+            yield return StartCoroutine(MoveCup(cupIndex, cups[cupIndex].RectTransform.anchoredPosition + new Vector2(0, 20), duration1));
             yield return StartCoroutine(MoveCup(cupIndex, new Vector2(cups[cupIndex].RectTransform.anchoredPosition.x, itemYPos), duration2));
+            cups[cupIndex].SetRelease();
+        }
+        IEnumerator CupToBack(int cupIndex, float duration1, float duration2)
+        {
+            float x = cups[cupIndex].RectTransform.anchoredPosition.x;
+            yield return StartCoroutine(MoveCup(cupIndex, new Vector2(x, cupOriginalPos[cupIndex].y) + new Vector2(0, 20), duration1));
+            yield return StartCoroutine(MoveCup(cupIndex, new Vector2(x, cupOriginalPos[cupIndex].y), duration2));
             cups[cupIndex].SetRelease();
         }
         IEnumerator GrabCup(Hand hand, int cupIndex, float duration)
@@ -117,7 +206,9 @@ namespace Yabawee
             yield return new WaitForSeconds(handMoveDuration);
 
             cups[cupIndicies[0]].transform.SetAsFirstSibling();
+            hands[handIdx].transform.SetSiblingIndex(1);
             cups[cupIndicies[1]].transform.SetAsLastSibling();
+            hands[1-handIdx].transform.SetAsLastSibling();
 
             Vector2 cup0pos = cups[cupIndicies[0]].RectTransform.anchoredPosition;
             Vector2 cup1pos = cups[cupIndicies[1]].RectTransform.anchoredPosition;
