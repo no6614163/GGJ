@@ -16,4 +16,6 @@ public enum SceneType
 {
     Start,
     Lobby,
+    Game_Card,
+    Game_Pong,
 }
