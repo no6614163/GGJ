@@ -22,7 +22,7 @@ public class GameState : MonoBehaviour
             m_End = true;
             time = 0f;
             // TODO : 현재 스테이지 확인 후 마지막 스테이지인 경우 succeess 호출 해줘야됨.
-            // UI_Manager.Instance.ShowPopupUI<UI_ClearPopup>();
+            UI_Manager.Instance.ShowPopupUI<UI_ClearPopup>();
             // UI_Manager.Instance.ShowPopupUI<UI_SuccessPopup>();
         }
 
