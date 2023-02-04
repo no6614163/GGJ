@@ -9,8 +9,10 @@ namespace CardMatch
     {
         GameConfig config;
         public GameConfig Config { get { return config; } }
+        [SerializeField] RectTransform canvas;
         [SerializeField] RectTransform cardParent;
         [SerializeField] CardBehaviour cardPrefab;
+        [SerializeField] UIBurstParticle particlePrefab;
 
         List<CardBehaviour> cards = new List<CardBehaviour>();
 
@@ -19,6 +21,11 @@ namespace CardMatch
         int wrongCount = 0;
         int matchedCards = 0;
 
+        public void InstantiateParticle(Vector2 pos)
+        {
+            var particle = Instantiate(particlePrefab, canvas.transform);
+            particle.RectTransform.anchoredPosition = pos;
+        }
 
         protected override void Awake()
         {
@@ -100,6 +107,8 @@ namespace CardMatch
         void OnCorrect(CardBehaviour card1, CardBehaviour card2)
         {
             //TODO : 정답 효과, 점수추가
+            InstantiateParticle(card1.RectTransform.anchoredPosition);
+            InstantiateParticle(card2.RectTransform.anchoredPosition);
             card1.Clickable = false;
             card2.Clickable = false;
             matchedCards += 2;

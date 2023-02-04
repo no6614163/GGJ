@@ -8,17 +8,27 @@ namespace CardMatch
     public class CardBehaviour : MonoBehaviour
     {
         [SerializeField] Image contentImage;
+        [SerializeField] ScaleAtHover frontAnim;
+        [SerializeField] ScaleAtHover backAnim;
 
         Animator animator;
         LevelManager levelManager;
         public Sprite Sprite { get; private set; }
-        public bool Clickable { get; set; } = false;
+        bool _clickable = false;
+        public bool Clickable { get { return _clickable; }
+            set {
+                _clickable = value;
+                frontAnim.IsAnimAble = value;
+                backAnim.IsAnimAble = value;
+            } }
 
         bool isDesiredFront = false;
-
+        RectTransform rectTransform;
+        public RectTransform RectTransform { get { return rectTransform; } }
         private void Awake()
         {
             animator = GetComponent<Animator>();
+            rectTransform = GetComponent<RectTransform>();
         }
         public void Init(Sprite sprite, LevelManager levelManager)
         {
@@ -44,19 +54,18 @@ namespace CardMatch
         {
             if (!Clickable)
                 return;
-            Debug.Log("OnPointerEnter");
+            SoundManager.Instance.PlaySFXPitched("Hover", "GameCommon", 0.05f);
         }
         public void OnPointerExit()
         {
             if (!Clickable)
                 return;
-            Debug.Log("OnPointerExit");
         }
         public void OnClick()
         {
             if (!Clickable)
                 return;
-            Debug.Log("OnClick");
+            SoundManager.Instance.PlaySFXPitched("Click", "GameCommon", 0.1f);
             levelManager.OnCardClicked(this);
         }
         public void SetDesiredState(bool isFront)

@@ -60,6 +60,36 @@ public class SoundManager : HappyUtils.SingletonBehaviour<SoundManager>
         _sfxSource.PlayOneShot(sound.Clip, sound.Volume * volumeMultiplier);
     }
     /// <summary>
+    /// Plays sound in the list. If there are multiple sounds with the same name, play one of those randomly.
+    /// </summary>
+    public void PlaySFXPitched(string soundName, string listTitle, float pitch, float volumeMultiplier = 1f)
+    {
+        AudioSource source = gameObject.AddComponent<AudioSource>();
+        var list = _Sfxs.Find(x => x.ListTitle == listTitle);
+        if (list == null)
+        {
+            Debug.LogError(listTitle + "에서 " + soundName + " 사운드를 찾을 수 없음!");
+            return;
+        }
+        List<Sound> sounds = list.GetAllSounds(soundName);
+
+        if (sounds.Count == 0)
+        {
+            Debug.LogError(soundName + " 사운드를 찾을 수 없음!");
+            return;
+        }
+        Sound sound = HappyUtils.Random.RandomElement(sounds);
+        source.pitch = 1 + Random.Range(-pitch / 2, pitch);
+        source.PlayOneShot(sound.Clip, sound.Volume * volumeMultiplier);
+        StartCoroutine(DestroyAtStop(source));
+    }
+    IEnumerator DestroyAtStop(AudioSource source)
+    {
+        while (source.isPlaying)
+            yield return null;
+        Destroy(source);
+    }
+    /// <summary>
     /// Plays sound in the list. If there are multiple sounds with the same name, play them in sequence each time.
     /// </summary>
     public void PlaySFXToggle(string soundName, string listTitle, float volumeMultiplier = 1f)
