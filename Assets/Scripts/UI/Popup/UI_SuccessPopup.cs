@@ -48,7 +48,7 @@ public class UI_SuccessPopup : UI_Popup
         for (int i = 0; i < Constants.MaxStageCount; i++)
         {
             // TODO : 애니메이션 실행
-            seq.Append(Get<TMP_Text>((int)Texts.Text_Stage + i + 1).DOText(string.Format("Stage {0} : {1}", i + 1, GameSystem.Instance.ScoreArray[i]), 1));
+            seq.Append(Get<TMP_Text>((int)Texts.Text_Stage + i + 1).DOText(string.Format("Stage {0} : {1}", i + 1, "Clear", 1), 1));
         }
 
         seq.Play();

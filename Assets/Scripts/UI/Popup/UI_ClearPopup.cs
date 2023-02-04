@@ -42,7 +42,7 @@ public class UI_ClearPopup : UI_Popup
         // TODO : 애니메이션 실행
         int stage = GameSystem.Instance.CurrentStage;
         // NOTE : 스코어 등록이 선행되어야함.
-        Get<TMP_Text>((int)Texts.Text_Stage).DOText(string.Format("Stage {0} : {1}", stage, GameSystem.Instance.ScoreArray[stage - 1]), 1);
+        Get<TMP_Text>((int)Texts.Text_Stage).DOText(string.Format("Stage {0} : {1}", stage, "Clear"), 1);
     }
 
     void OnButtonClickedNextStage(PointerEventData evt)
