@@ -82,6 +82,7 @@ namespace Yabawee
         {
             for (int i = 0; i < config.RoundCount; i++)
             {
+                yield return new WaitForSeconds(config.RoundInterval);
                 yield return StartCoroutine(RoundCoroutine(i));
                 chosenCup = null;
                 if(isWrong)
@@ -90,7 +91,6 @@ namespace Yabawee
                     ShowResult(false);
                     yield break;
                 }
-                yield return new WaitForSeconds(config.RoundInterval);
             }
             //게임 클리어
             ShowResult(true);

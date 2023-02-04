@@ -126,6 +126,7 @@ namespace CardMatch
         public override void OnTimerEnd()
         {
             StartCoroutine(EndCoroutine(false));
+            SoundManager.Instance.PlaySFX("Wrong", "CardMatch");
         }
         void OnGameClear()
         {
