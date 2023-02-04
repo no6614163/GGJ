@@ -35,7 +35,7 @@ public class Catch_Mole : Singleton<Catch_Mole>
     public void MoleNotHitted()
     {
         total_count++;
-        if (total_count ==3)
+        if (obj2.GetComponent<Catching>().m_End==false&&total_count == 3)
         {
             obj2.GetComponent<Catching>().m_End = true;
             UI_Manager.Instance.ShowPopupUI<UI_FailedPopup>();
