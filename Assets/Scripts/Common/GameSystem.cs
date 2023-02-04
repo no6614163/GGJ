@@ -13,6 +13,7 @@ public class GameSystem : Singleton<GameSystem>
     public int CurrentStage { get; private set; }
     public int[] ScoreArray { get; private set; }
 
+    public int GameLevel { get; private set; }
 
     public List<ShopItem> ShopItems;
 
@@ -68,6 +69,10 @@ public class GameSystem : Singleton<GameSystem>
         CurrentStage++;
     }
 
+    public void SetGameLevel(int level)
+    {
+        GameLevel= level;
+    }
 
     /// <summary>
     /// SceneIdx : Define.cs 에서 Scene index 확인 및 projectsetting에 scene index 세팅해줘야됨.
