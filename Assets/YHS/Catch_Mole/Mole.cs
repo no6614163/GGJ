@@ -4,54 +4,100 @@ using UnityEngine;
 
 public enum MoleState
 {
-    None,
-    Open,
-    Idle,
-    Close,
+    UnderGround=0,
+    OnGround,
+    MoveUp,
+    MoveDown,
     Catch
 }
-
 public class Mole : MonoBehaviour
 {
-    public MoleState MS;
-    public int plusPoint = 100;
-    public int minusPoint = -1000;
+    GameObject obj1;
+    //public int count = 0;
+    public bool hit = false;
 
-    private float waitTime;
-    private Animator anim;
+    [SerializeField]
+    private float waitTimeOnGround;
+    [SerializeField]
+    private float limitMinY;
+    [SerializeField]
+    private float limitMaxY;
+    private MoveMent movement;
+    public MoleState MoleState { private set; get; }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        anim = GetComponent<Animator>();
-        MS = MoleState.None;
-        waitTime = Random.Range(0.5f, 4.5f);
-
+        obj1 = GameObject.Find("Catch_Mole");
+    }
+    private void Awake()
+    {
+        movement = GetComponent<MoveMent>();
+        ChangeState(MoleState.UnderGround);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ChangeState(MoleState newState)
     {
-        if (waitTime >= 0)
-        {
-            waitTime -= Time.deltaTime;
-        }
-        else if (MS == MoleState.None)
-        {
-            OpenMole();
-        }
-
+        StopCoroutine(MoleState.ToString());
+        MoleState = newState;
+        StartCoroutine(MoleState.ToString());
     }
-    void OpenMole(){
-		int isGood = Random.Range (0, 100);
-		MS = MoleState.Open;
-		if (isGood <= goodGuyPercent) {
-			anim.SetTrigger ("OpenB");
-			MT = MoleType.GoodGuy;
-		} else {
-			anim.SetTrigger ("OpenA");
-			MT = MoleType.BadGuy;
-		}
-	}
 
+    private IEnumerator UnderGround()
+    {
+        movement.MoveTo(Vector2.zero);
+        transform.position = new Vector2(transform.position.x, limitMinY);
+
+        yield return null;
+    }
+
+    private IEnumerator OnGround()
+    {
+        movement.MoveTo(Vector2.zero);
+        transform.position = new Vector2(transform.position.x, limitMaxY);
+        yield return new WaitForSeconds(waitTimeOnGround);
+        ChangeState(MoleState.MoveDown);
+    }
+
+    private IEnumerator MoveUp()
+    {
+        movement.MoveTo(Vector2.up);
+        transform.position = new Vector3(transform.position.x, limitMinY);
+        hit = false;
+        while (true)
+        {
+            if (hit)
+            {
+                gameObject.SetActive(false);
+                StopAllCoroutines();
+                break;
+            }
+            if (transform.position.y>=limitMaxY)
+            {
+                ChangeState(MoleState.OnGround);
+            }
+            yield return null;
+        }
+    }
+
+    public IEnumerator MoveDown()
+    {
+        movement.MoveTo(Vector2.down);
+        //count = obj1.GetComponent<Catching>().GameOver_Check;
+        while (true)
+        {
+            if (hit)
+            {
+                gameObject.SetActive(false);
+                StopAllCoroutines();
+                break;
+            }
+            if(transform.position.y<=limitMinY)
+            {
+                ChangeState(MoleState.UnderGround);
+                obj1.GetComponent<Catch_Mole>().MoleNotHitted();
+
+            }
+            yield return null;
+        }
+    }
 }
