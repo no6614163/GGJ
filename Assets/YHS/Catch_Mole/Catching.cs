@@ -51,7 +51,10 @@ public class Catching : MonoBehaviour
             Debug.Log("Å¬¸®¾î");
             m_End = true;
             time = 0f;
-            UI_Manager.Instance.ShowPopupUI<UI_ClearPopup>();
+            if (GameSystem.Instance.CurrentStage == Constants.MaxStageCount)
+                UI_Manager.Instance.ShowPopupUI<UI_SuccessPopup>();
+            else
+                UI_Manager.Instance.ShowPopupUI<UI_ClearPopup>();
             SoundManager.Instance.PlaySFXPitched("clear", "MoleSound", 0.02f);
             Time.timeScale = 0;
         }

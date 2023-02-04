@@ -114,12 +114,12 @@ namespace JumpJump
             if(isLose)
             {
                 yield return new WaitForSeconds(1);
-                UI_Manager.Instance.ShowPopupUI<UI_FailedPopup>();
+                ShowResult(false);
             }
             else
             {
                 yield return new WaitForSeconds(2);
-                UI_Manager.Instance.ShowPopupUI<UI_ClearPopup>();
+                ShowResult(true);
             }
 
         }

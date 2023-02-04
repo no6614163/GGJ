@@ -149,9 +149,9 @@ namespace CardMatch
 
             yield return new WaitForSeconds(1f);
             if (isWin)
-                UI_Manager.Instance.ShowPopupUI<UI_ClearPopup>();
+                ShowResult(true);
             else
-                UI_Manager.Instance.ShowPopupUI<UI_FailedPopup>();
+                ShowResult(false);
         }
     }
 }

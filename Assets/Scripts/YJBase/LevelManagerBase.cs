@@ -46,5 +46,20 @@ public abstract class LevelManagerBase : MonoBehaviour
     public virtual void OnTimerEnd()
     { }
 
+    public void ShowResult(bool isWin)
+    {
+        if( isWin)
+        {
+            if(GameSystem.Instance.CurrentStage == Constants.MaxStageCount)
+                UI_Manager.Instance.ShowPopupUI<UI_SuccessPopup>();
+            else
+                UI_Manager.Instance.ShowPopupUI<UI_ClearPopup>();
+        }
+        else
+        {
+            UI_Manager.Instance.ShowPopupUI<UI_FailedPopup>();
+        }
+    }
+
     
 }
