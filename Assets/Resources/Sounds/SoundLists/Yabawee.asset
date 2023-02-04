@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3283c5a7233ffd4b9416e9cc7bac3f8, type: 3}
+  m_Name: Yabawee
+  m_EditorClassIdentifier: 
+  _listTitle: Yabawee
+  _sounds:
+  - _name: Shuffle
+    _clip: {fileID: 8300000, guid: f061c89a9dc563547bbee6ae0be8967c, type: 3}
+    _volume: 0.5
+  - _name: Shuffle
+    _clip: {fileID: 8300000, guid: 6503fe36ec133cc49a12edba08061d6e, type: 3}
+    _volume: 0.5
+  - _name: Grab
+    _clip: {fileID: 8300000, guid: 028da1dc76fc74a9881aa389a9f19e60, type: 3}
+    _volume: 0.5
+  - _name: Land
+    _clip: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
+    _volume: 0.5
+  - _name: Wrong
+    _clip: {fileID: 8300000, guid: 89e6bc608da7b47d4914f3d9c2484e48, type: 3}
+    _volume: 0.5

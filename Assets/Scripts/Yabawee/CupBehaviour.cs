@@ -7,8 +7,10 @@ namespace Yabawee
     public class CupBehaviour : MonoBehaviour
     {
         [SerializeField] RectTransform handPosition;
+        ScaleAtHover animEffect;
         public RectTransform RectTransform { get; private set; }
-        public bool Clickable { get; set; }
+        bool clickable = false;
+        public bool Clickable { get { return clickable; } set { clickable = value; animEffect.IsAnimAble = value; } }
         public int ID { get; private set; }
         public Vector2 HandPosition { get { return handPosition.anchoredPosition + RectTransform.anchoredPosition; } }
 
@@ -17,6 +19,8 @@ namespace Yabawee
         private void Awake()
         {
             RectTransform = GetComponent<RectTransform>();
+            animEffect = GetComponent<ScaleAtHover>();
+            animEffect.PlaySound = true;
         }
         public void Init(LevelManager levelManager, int id)
         {
@@ -49,19 +53,16 @@ namespace Yabawee
         {
             if (!Clickable)
                 return;
-            Debug.Log("OnPointerEnter");
         }
         public void OnPointerExit()
         {
             if (!Clickable)
                 return;
-            Debug.Log("OnPointerExit");
         }
         public void OnClick()
         {
             if (!Clickable)
                 return;
-            Debug.Log("OnClick");
             levelManager.OnCupClicked(this);
         }
     }

@@ -15,4 +15,4 @@ MonoBehaviour:
   TimeScale: 1
   TimeLimit: 20
   ShuffleCount: 6
-  BoardSize: 2
+  BoardSize: 4

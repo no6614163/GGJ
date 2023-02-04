@@ -73,8 +73,8 @@ namespace CardMatch
         {
             if (!Clickable)
                 return;
-            SoundManager.Instance.PlaySFXPitched("Click", "GameCommon", 0.1f);
             levelManager.OnCardClicked(this);
+            SoundManager.Instance.PlaySFXPitched("Click", "GameCommon", 0.1f);
         }
         public void SetDesiredState(bool isFront)
         {

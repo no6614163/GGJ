@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb062889ea9a5249aaadc908c2693de, type: 3}
   m_Name: 1
   m_EditorClassIdentifier: 
-  TimeScale: 2
+  TimeScale: 1
   TimeLimit: 20
-  CupCount: 3
+  CupCount: 4
   ShufflePerRound: 030000000400000006000000
   MinItemMoveCount: 020000000300000004000000
   FalseShuffleRangePerRound:

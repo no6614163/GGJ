@@ -25,6 +25,13 @@ namespace Yabawee
         [SerializeField] RectTransform showStage;
         [SerializeField] Item item;
         [SerializeField] CupBehaviour cupPrefab;
+        [SerializeField] RectTransform canvas;
+        [SerializeField] UIBurstParticle particlePrefab;
+        public void InstantiateParticle(Vector2 pos)
+        {
+            var particle = Instantiate(particlePrefab, canvas.transform);
+            particle.RectTransform.position = pos;
+        }
 
         GameConfig config;
         public GameConfig Config { get { return config; } }
@@ -33,8 +40,9 @@ namespace Yabawee
         {
             chosenCup = cup;
         }
-        protected virtual void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             //TODO : config 변경
             //--
             config = GetComponent<GameConfig>();
@@ -155,7 +163,6 @@ namespace Yabawee
                 if (i < config.ShufflePerRound[round] - 1)
                     yield return new WaitForSeconds(config.ShuffleInterval * config.DurationScale);
             }
-            item.gameObject.SetActive(true);
             item.transform.SetAsFirstSibling();
             yield return StartCoroutine(ReturnHands());
 
@@ -166,18 +173,18 @@ namespace Yabawee
             while (chosenCup == null)
                 yield return null;
 
-            if(chosenCup.ID == currentItemIndex)
+            foreach (var cup in cups)
+                cup.Clickable = false;
+            item.gameObject.SetActive(true);
+            item.RectTransform.anchoredPosition = new Vector2(cups[currentItemIndex].RectTransform.anchoredPosition.x, itemYPos);
+            if (chosenCup.ID == currentItemIndex)
                 OnCorrect();
             else
                 OnWrong();
 
-            foreach (var cup in cups)
-                cup.Clickable = false;
-            yield return new WaitForSeconds(0.5f);
             int hand = GetCloseHandIndex(chosenCup);
-            item.gameObject.SetActive(true);
-            item.RectTransform.anchoredPosition = new Vector2(cups[currentItemIndex].RectTransform.anchoredPosition.x, itemYPos);
             yield return StartCoroutine(GrabCup(hands[hand], chosenCup.ID, handMoveDuration * dur[0]));
+            item.Shake();
             yield return StartCoroutine(CupToBack(chosenCup.ID, handMoveDuration * dur[1], handMoveDuration * dur[2]));
             yield return new WaitForSeconds(1f);
 
@@ -251,11 +258,12 @@ namespace Yabawee
         }
         void OnCorrect()
         {
-            Debug.Log("정답!");
+            InstantiateParticle(item.RectTransform.position);
+            SoundManager.Instance.PlaySFXToggle("Correct", "GameCommon");
         }
         void OnWrong()
         {
-            Debug.Log("OnWrong!");
+            SoundManager.Instance.PlaySFXPitched("Wrong", "Yabawee", 0.05f, 1.2f);
             isWrong = true;
         }
         IEnumerator CupToFront(int cupIndex, float duration1, float duration2)
@@ -263,6 +271,7 @@ namespace Yabawee
             yield return StartCoroutine(MoveCup(cupIndex, cups[cupIndex].RectTransform.anchoredPosition + new Vector2(0, 20), duration1));
             yield return StartCoroutine(MoveCup(cupIndex, new Vector2(cups[cupIndex].RectTransform.anchoredPosition.x, itemYPos), duration2));
             cups[cupIndex].SetRelease();
+            SoundManager.Instance.PlaySFXPitched("Land", "Yabawee", 0.05f);
         }
         IEnumerator CupToBack(int cupIndex, float duration1, float duration2)
         {
@@ -270,11 +279,15 @@ namespace Yabawee
             yield return StartCoroutine(MoveCup(cupIndex, new Vector2(x, cupOriginalPos[cupIndex].y) + new Vector2(0, 20), duration1));
             yield return StartCoroutine(MoveCup(cupIndex, new Vector2(x, cupOriginalPos[cupIndex].y), duration2));
             cups[cupIndex].SetRelease();
+            SoundManager.Instance.PlaySFXPitched("Land", "Yabawee", 0.05f);
         }
         IEnumerator GrabCup(Hand hand, int cupIndex, float duration)
         {
             yield return StartCoroutine(MoveHandToCup(hand, cupIndex, duration));
+            if(hand.transform.parent != cups[cupIndex].transform)
+                SoundManager.Instance.PlaySFXPitched("Grab", "Yabawee", 0.05f);
             cups[cupIndex].SetGrabbed(hand);
+
         }
 
         IEnumerator Shuffle(int [] cupIndicies, bool falseShuffle)
@@ -290,6 +303,8 @@ namespace Yabawee
             StartCoroutine(GrabCup(hands[handIdx], cupIndicies[0], handMoveDuration));
             StartCoroutine(GrabCup(hands[1-handIdx], cupIndicies[1], handMoveDuration));
             yield return new WaitForSeconds(handMoveDuration);
+
+            SoundManager.Instance.PlaySFXToggle("Shuffle", "Yabawee");
 
             cups[cupIndicies[0]].transform.SetAsFirstSibling();
             hands[handIdx].transform.SetSiblingIndex(1);

@@ -10,12 +10,20 @@ namespace SlidingPuzzle
         [SerializeField] Image image;
         public Vector2Int PosInGrid { get; set; }
 
-        public bool Clickable { get; set; } = true;
+        bool clickable = true;
+        Animator animator;
+        public bool Clickable
+        {
+            get { return clickable; }
+            set { clickable = value; hoverAnim.IsAnimAble = value; }
+        }
         public int ID { get; private set; }
         public Vector2 Position { get { return rectTransform.anchoredPosition; } set { rectTransform.anchoredPosition = value; } }
         public Vector2 Size { get { return rectTransform.rect.size; } set { rectTransform.sizeDelta = value; } }
         RectTransform rectTransform;
         LevelManager levelManager;
+
+        [SerializeField] ScaleAtHover hoverAnim;
         public void Init(LevelManager levelManager, Sprite sprite, int id)
         {
             image.sprite = sprite;
@@ -25,6 +33,7 @@ namespace SlidingPuzzle
         private void Awake()
         {
             rectTransform = GetComponent<RectTransform>();
+            animator = GetComponent<Animator>();
         }
         public IEnumerator RemoveBorder(float duration)
         {
@@ -44,21 +53,21 @@ namespace SlidingPuzzle
         {
             if (!Clickable)
                 return;
-            Debug.Log("OnPointerEnter");
         }
         public void OnPointerExit()
         {
             if (!Clickable)
                 return;
-            Debug.Log("OnPointerExit");
         }
         public void OnClick()
         {
             if (!Clickable)
                 return;
-            Debug.Log("OnClick");
             if (!levelManager.OnPieceClicked(this))
-                Debug.Log("누를수 없음");
+            {
+                animator.SetTrigger("Wrong");
+                SoundManager.Instance.PlaySFX("Wrong", "GameCommon");
+            }
         }
     }
 }
