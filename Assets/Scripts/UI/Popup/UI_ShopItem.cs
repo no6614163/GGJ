@@ -49,10 +49,9 @@ public class UI_ShopItem : UI_Popup
     void OnButtonClickedItem(PointerEventData evt)
     {
         Debug.Log("Item");
-
-
-
-
+        // ÆË¾÷ ¶ç¿öÁÖ´Âµ¥ ÆË¾÷¿¡ Á¤º¸ ³Ñ°Ü¾ßµÊ.
+        var popup = UI_Manager.Instance.ShowPopupUI<UI_PurchasePopup>();
+        popup.SetData(m_Item);
     }
 
 }

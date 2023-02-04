@@ -26,3 +26,16 @@ public enum ItemType
     Deco,
     Animal,
 }
+
+public enum AnimalType
+{
+    Sheep,
+    Sheep1,
+    Sheep2,
+    Sheep3,
+    Sheep4,
+    Sheep5,
+    Sheep6,
+    Sheep7,
+    Sheep8,
+}
