@@ -78,6 +78,7 @@ public class UI_SettingsPopup : UI_Popup
     {
         // TODO : 사운드매니저를 통해서 사운드 조절
         SoundManager.Instance._bgmSource.volume = value;
+        SoundManager.Instance._ambienceSource.volume = value;
     }
 
 

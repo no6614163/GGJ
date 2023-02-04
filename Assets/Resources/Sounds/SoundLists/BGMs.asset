@@ -20,9 +20,6 @@ MonoBehaviour:
   - _name: MiniGame
     _clip: {fileID: 8300000, guid: e90d3f290a7649846a41627926023f1f, type: 3}
     _volume: 0.5
-  - _name: MiniGame
-    _clip: {fileID: 8300000, guid: e90d3f290a7649846a41627926023f1f, type: 3}
-    _volume: 0.5
   - _name: Ambience
     _clip: {fileID: 8300000, guid: fa776870d011947e49d8da8ba3c72511, type: 3}
     _volume: 0.65
