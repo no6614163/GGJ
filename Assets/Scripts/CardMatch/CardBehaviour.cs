@@ -29,9 +29,15 @@ namespace CardMatch
         void Flip(bool isFront)
         {
             if (isFront)
+            {
                 animator.SetTrigger("FlipToFront");
+                SoundManager.Instance.PlaySFXToggle("FlipFront", "CardMatch");
+            }
             else
+            {
                 animator.SetTrigger("FlipToBack");
+                SoundManager.Instance.PlaySFXToggle("FlipBack", "CardMatch");
+            }
         }
 
         public void OnPointerEnter()
