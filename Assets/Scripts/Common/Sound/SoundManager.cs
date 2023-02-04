@@ -9,10 +9,20 @@ public class SoundManager : HappyUtils.SingletonBehaviour<SoundManager>
     public AudioSource _sfxSource;
     public AudioSource _ambienceSource;
 
+    [SerializeField] Transform _pitchedSource;
+
     [SerializeField] SoundList _Bgms;
     [SerializeField] List<SoundList> _Sfxs;
 
+    List<AudioSource> pitchedSources = new List<AudioSource>();
     Dictionary<string, int> toggles = new Dictionary<string, int>();
+
+    private new void Awake()
+    {
+        base.Awake();
+        for (int i = 0; i < 10; i++)
+            pitchedSources.Add(_pitchedSource.gameObject.AddComponent<AudioSource>());
+    }
     public void PlayBGM(string name, float volumeMultiplier = 1f)
     {
         Sound sound = _Bgms.GetSound(name);
@@ -78,7 +88,13 @@ public class SoundManager : HappyUtils.SingletonBehaviour<SoundManager>
     /// </summary>
     public void PlaySFXPitched(string soundName, string listTitle, float pitch, float volumeMultiplier = 1f)
     {
-        AudioSource source = gameObject.AddComponent<AudioSource>();
+        if(pitchedSources.Count == 0)
+        {
+            pitchedSources.Add(_pitchedSource.gameObject.AddComponent<AudioSource>());
+        }
+        AudioSource source = pitchedSources[0];
+        pitchedSources.RemoveAt(0);
+
         var list = _Sfxs.Find(x => x.ListTitle == listTitle);
         if (list == null)
         {
@@ -94,6 +110,7 @@ public class SoundManager : HappyUtils.SingletonBehaviour<SoundManager>
         }
         Sound sound = HappyUtils.Random.RandomElement(sounds);
         source.pitch = 1 + Random.Range(-pitch / 2, pitch);
+        source.volume = _sfxSource.volume;
         source.PlayOneShot(sound.Clip, sound.Volume * volumeMultiplier);
         StartCoroutine(DestroyAtStop(source));
     }
@@ -101,7 +118,7 @@ public class SoundManager : HappyUtils.SingletonBehaviour<SoundManager>
     {
         while (source.isPlaying)
             yield return null;
-        Destroy(source);
+        pitchedSources.Add(source);
     }
     /// <summary>
     /// Plays sound in the list. If there are multiple sounds with the same name, play them in sequence each time.
