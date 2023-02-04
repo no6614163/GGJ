@@ -32,6 +32,7 @@ public class UI_CreditsPopup : UI_Popup
 
     void OnButtonClickedBack(PointerEventData evt)
     {
+        SoundManager.Instance.PlaySFX("Click", "GameCommon");
         Debug.Log("Back");
         UI_Manager.Instance.ClosePopupUI();
     }

@@ -67,6 +67,7 @@ public class UI_Game : UI_Scene
 
     void OnButtonClickedSetting(PointerEventData evt)
     {
+        SoundManager.Instance.PlaySFX("Click", "GameCommon");
         Debug.Log("Settings");
         Time.timeScale = 0;
         //UI_Manager.Instance.ShowPopupUI<UI_SettingsPopup>();

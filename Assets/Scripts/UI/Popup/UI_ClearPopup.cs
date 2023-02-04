@@ -43,6 +43,7 @@ public class UI_ClearPopup : UI_Popup
         int stage = GameSystem.Instance.CurrentStage;
         // NOTE : 스코어 등록이 선행되어야함.
         Get<TMP_Text>((int)Texts.Text_Stage).DOText(string.Format("Stage {0} : {1}", stage, "Clear"), 1);
+        SoundManager.Instance.PlaySFX("Win", "UI");
     }
 
     void OnButtonClickedNextStage(PointerEventData evt)

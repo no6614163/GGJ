@@ -97,6 +97,7 @@ public class UI_ShopPopup : UI_Popup
 
     void OnButtonClickedBack(PointerEventData evt)
     {
+        SoundManager.Instance.PlaySFX("Click", "GameCommon");
         Debug.Log("Back");
         var rect = transform.GetChild(0).GetComponent<RectTransform>();
         rect.DOAnchorPosX(-3000, 1.5f).OnComplete(() => UI_Manager.Instance.ClosePopupUI());
@@ -104,6 +105,7 @@ public class UI_ShopPopup : UI_Popup
 
     void OnButtonClickedSetting(PointerEventData evt)
     {
+        SoundManager.Instance.PlaySFX("Click", "GameCommon");
         Debug.Log("Setting");
         var popup = UI_Manager.Instance.ShowPopupUI<UI_SettingsPopup>();
         var rect = popup.transform.GetChild(0).GetComponent<RectTransform>();
@@ -113,6 +115,7 @@ public class UI_ShopPopup : UI_Popup
 
     void OnButtonClickedFood(PointerEventData evt)
     {
+        SoundManager.Instance.PlaySFX("Click", "GameCommon");
         Debug.Log("Food");
         SetOffAllOutline();
         Get<Image>((int)Images.Image_FoodOutline).gameObject.SetActive(true);
@@ -121,6 +124,7 @@ public class UI_ShopPopup : UI_Popup
     }
     void OnButtonClickedDeco(PointerEventData evt)
     {
+        SoundManager.Instance.PlaySFX("Click", "GameCommon");
         Debug.Log("Deco");
         SetOffAllOutline();
         Get<Image>((int)Images.Image_DecoOutline).gameObject.SetActive(true);
@@ -129,6 +133,7 @@ public class UI_ShopPopup : UI_Popup
     }
     void OnButtonClickedAnimals(PointerEventData evt)
     {
+        SoundManager.Instance.PlaySFX("Click", "GameCommon");
         Debug.Log("Animals");
         SetOffAllOutline();
         Get<Image>((int)Images.Image_AnimalsOutline).gameObject.SetActive(true);

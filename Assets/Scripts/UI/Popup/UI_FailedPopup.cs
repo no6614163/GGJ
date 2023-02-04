@@ -58,10 +58,12 @@ public class UI_FailedPopup : UI_Popup
             }
         }
         seq.Play();
+        SoundManager.Instance.PlaySFX("Lose", "UI");
     }
 
     void OnButtonClickedOut(PointerEventData evt)
     {
+        SoundManager.Instance.PlaySFX("Click", "GameCommon");
         // TODO : 애니메이션들 넣어주면 좋음.
         Debug.Log("Out");
         // TODO : 로비로 이동하는 이벤트 + 점수 정산

@@ -28,18 +28,20 @@ public class Catch_Mole : Singleton<Catch_Mole>
     void Update()
     {
         lefttime = obj1.GetComponent<Catching>().time;
-        //pluscount = obj2.GetComponent<Mole>().count;
+
+        value = 1 - (lefttime / 20);
+        UI_Game.SetTimeSlider(value);
+        
+    }
+    public void MoleNotHitted()
+    {
+        total_count++;
         if (total_count > 2)
         {
             UI_Manager.Instance.ShowPopupUI<UI_FailedPopup>();
             SoundManager.Instance.PlaySFXPitched("end", "MoleSound", 0.02f);
             Time.timeScale = 0;
         }
-        value = 1 - (lefttime / 20);
-        UI_Game.SetTimeSlider(value);
     }
-    public void MoleNotHitted()
-    {
-        total_count++;
-    }
+
 }
