@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf7c34a0dc4e6348bea04faa70406ee, type: 3}
+  m_Name: Duck2 Sprite Library Asset
+  m_EditorClassIdentifier: 
+  m_Labels:
+  - m_Name: All
+    m_Hash: 55916349
+    m_CategoryList:
+    - m_Name: Body
+      m_Hash: 2073732236
+      m_Sprite: {fileID: 21300000, guid: 95ed61579c8064a0c8e1853b82ee38b5, type: 3}
+    - m_Name: Cheek
+      m_Hash: -1424677743
+      m_Sprite: {fileID: 21300000, guid: 234300cad7b0742dab90a77dacbe4dfa, type: 3}
+    - m_Name: Eye
+      m_Hash: 1245036881
+      m_Sprite: {fileID: 21300000, guid: a6c3cf24b41c9401b91e3a62a14aeb6f, type: 3}
+    - m_Name: Head
+      m_Hash: 130111906
+      m_Sprite: {fileID: 21300000, guid: 3fad05d0839d843bcb777a4644f0e8bd, type: 3}
+    - m_Name: Leg1
+      m_Hash: -973550584
+      m_Sprite: {fileID: 21300000, guid: 1ad2bd2bbe1ab409b88e384715531020, type: 3}
+    - m_Name: Leg2
+      m_Hash: 1559338418
+      m_Sprite: {fileID: 21300000, guid: 0a85940e961624c5e8946491b4ae54b4, type: 3}
+    - m_Name: Leg3
+      m_Hash: 737586468
+      m_Sprite: {fileID: 21300000, guid: 771f3117f0e38466bb3674ee168b6073, type: 3}
+    - m_Name: Leg4
+      m_Hash: -1248708473
+      m_Sprite: {fileID: 21300000, guid: 25a647e1bba8f40be9f5de87f302c07a, type: 3}
+    - m_Name: Wing1
+      m_Hash: 856966975
+      m_Sprite: {fileID: 21300000, guid: 8f74ccd7e8bc64f8f9c4f6c59b449c4b, type: 3}
+    - m_Name: Wing2
+      m_Hash: -1440934267
+      m_Sprite: {fileID: 21300000, guid: 629bc1845ee2b40a68de90c38da2228b, type: 3}
