@@ -33,7 +33,7 @@ namespace JumpJump
             {
                 Character character = Instantiate(characterPrefab, characterLayer.transform);
                 character.Init(this, ground.rect.height, Config.Characters[i]);
-                character.Position = new Vector2(character.Position.x + 100 * Config.CharactersRandomness * Random.Range(-0.5f, 0.5f), ground.rect.height);
+                character.Position = new Vector2(character.Position.x - 180 * Config.CharactersRandomness * ((float)i/Config.Characters.Length), ground.rect.height);
                 characters.Add(character);
             }
             characters.Sort((a, b) => (int)(b.Position.x - a.Position.x));
@@ -43,7 +43,7 @@ namespace JumpJump
 
         IEnumerator DelayJumps()
         {
-            float totalDelay = 0.1f * Config.CharactersRandomness * Config.DurationScale;
+            float totalDelay = 0.17f * Config.CharactersRandomness * Config.DurationScale;
             foreach (Character character in characters)
             {
                 character.Jump();
@@ -112,7 +112,10 @@ namespace JumpJump
             if(isLose)
                 UI_Manager.Instance.ShowPopupUI<UI_FailedPopup>();
             else
+            {
+                yield return new WaitForSeconds(2);
                 UI_Manager.Instance.ShowPopupUI<UI_ClearPopup>();
+            }
 
         }
         void OnGameOver()
@@ -125,6 +128,9 @@ namespace JumpJump
         void OnClear()
         {
             isGameOver = true;
+            foreach (var ch in characters)
+                ch.OnWin();
+            SoundManager.Instance.PlaySFX("Win", "JumpJump", 1.2f);
             StartCoroutine(SlowScroll(0.3f, false));
 
         }

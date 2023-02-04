@@ -9,17 +9,19 @@ public class Sound : ISerializationCallbackReceiver
     [SerializeField] AudioClip _clip;
     
     [SerializeField] [Range(0f, 1f)] float _volume = 0.5f;
+
+    float realvolume = 0.5f;
     public string Name { get { return _name; } }
     public AudioClip Clip { get { return _clip; } }
-    public float Volume { get { return _volume; } }
+    public float Volume { get { return realvolume; } }
 
     public void OnAfterDeserialize()
     {
-        _volume = 0.5f;
+        realvolume = _volume;
     }
-
     public void OnBeforeSerialize()
     {
+        _volume = realvolume;
     }
 }
 [CreateAssetMenu(menuName = "Sound List")]
