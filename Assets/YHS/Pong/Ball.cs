@@ -47,6 +47,7 @@ public class Ball : MonoBehaviour
             float y = hitFactor(transform.position, col.transform.position, col.collider.bounds.size.y);
             Vector2 dir = new Vector2(1, y).normalized;
             GetComponent<Rigidbody2D>().velocity = dir * speed;
+            SoundManager.Instance.PlaySFXPitched("bounce", "pong", 0.02f);
         }
 
         

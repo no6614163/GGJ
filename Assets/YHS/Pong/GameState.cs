@@ -33,6 +33,7 @@ public class GameState : MonoBehaviour
     {
         if(col.gameObject.name=="ball")
         {
+            SoundManager.Instance.PlaySFXPitched("end", "pong", 0.02f);
             Time.timeScale = 0;
             Debug.Log("½ÇÆÐ");
             UI_Manager.Instance.ShowPopupUI<UI_FailedPopup>();

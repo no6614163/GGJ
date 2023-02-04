@@ -33,7 +33,12 @@ public class Catching : MonoBehaviour
                     Debug.Log("두더지 잡음");
                     hit.collider.GetComponent<Mole>().hit = true;
                     //obj2.GetComponent<Mole>().hit = true;
+                    SoundManager.Instance.PlaySFXPitched("click", "MoleSound", 0.02f);
 
+                }
+                else
+                {
+                    SoundManager.Instance.PlaySFXPitched("missclick", "MoleSound", 0.02f);
                 }
             }
         }
