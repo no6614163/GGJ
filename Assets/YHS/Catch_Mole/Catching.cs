@@ -52,6 +52,7 @@ public class Catching : MonoBehaviour
             m_End = true;
             time = 0f;
             UI_Manager.Instance.ShowPopupUI<UI_ClearPopup>();
+            SoundManager.Instance.PlaySFXPitched("clear", "MoleSound", 0.02f);
             Time.timeScale = 0;
         }
 

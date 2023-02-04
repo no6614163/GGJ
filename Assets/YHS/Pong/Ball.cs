@@ -50,6 +50,11 @@ public class Ball : MonoBehaviour
             SoundManager.Instance.PlaySFXPitched("bounce", "pong", 0.02f);
         }
 
+        if(col.gameObject.name=="RacketR")
+        {
+            SoundManager.Instance.PlaySFXPitched("bounce", "pong", 0.02f);
+        }
+
         
     }
 }

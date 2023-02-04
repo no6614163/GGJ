@@ -20,3 +20,9 @@ MonoBehaviour:
   - _name: missclick
     _clip: {fileID: 8300000, guid: 09579d5ff78303b4399e36af8b13b20c, type: 3}
     _volume: 0.5
+  - _name: clear
+    _clip: {fileID: 8300000, guid: a77c5f5d4509e7f48b930257da10e50e, type: 3}
+    _volume: 0.5
+  - _name: end
+    _clip: {fileID: 8300000, guid: 0cd1bc0d07db1724d80b321e8c3b28e3, type: 3}
+    _volume: 0.5

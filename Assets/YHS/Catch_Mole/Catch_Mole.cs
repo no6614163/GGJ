@@ -32,6 +32,7 @@ public class Catch_Mole : Singleton<Catch_Mole>
         if (total_count > 2)
         {
             UI_Manager.Instance.ShowPopupUI<UI_FailedPopup>();
+            SoundManager.Instance.PlaySFXPitched("end", "MoleSound", 0.02f);
             Time.timeScale = 0;
         }
         value = 1 - (lefttime / 20);

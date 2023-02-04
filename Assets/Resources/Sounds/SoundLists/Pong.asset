@@ -15,8 +15,11 @@ MonoBehaviour:
   _listTitle: pong
   _sounds:
   - _name: bounce
-    _clip: {fileID: 8300000, guid: a77c5f5d4509e7f48b930257da10e50e, type: 3}
+    _clip: {fileID: 8300000, guid: 9ad0bf29e95214440a2a873b2f5a5375, type: 3}
     _volume: 0.5
   - _name: end
     _clip: {fileID: 8300000, guid: 0cd1bc0d07db1724d80b321e8c3b28e3, type: 3}
+    _volume: 0.5
+  - _name: clear
+    _clip: {fileID: 8300000, guid: a77c5f5d4509e7f48b930257da10e50e, type: 3}
     _volume: 0.5
