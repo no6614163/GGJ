@@ -4,16 +4,18 @@ using UnityEngine;
 
 namespace JumpJump
 {
-    public class GameConfig : MonoBehaviour
+    public class GameConfig : GameConfigBase
     {
-        public Sprite[] Characters;
-
+        [SerializeField] GameConfigAsset asset;
         public float ScrollSpeed;
         public float BgScrollSlow;
-        public float TimeLimit;
         public float CharactersRandomness;
         public float JumpPower;
         public float Gravity;
-        public Vector2 ObstacleDistanceRange;
+
+        public override GameConfigAssetBase Asset => asset;
+
+        public Sprite[] Characters { get { return asset.Characters; } }
+        public Vector2 ObstacleDistanceRange { get { return asset.ObstacleDistanceRange; } }
     }
 }

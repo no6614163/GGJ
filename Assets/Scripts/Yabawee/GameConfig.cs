@@ -4,18 +4,22 @@ using UnityEngine;
 
 namespace Yabawee
 {
-    public class GameConfig : MonoBehaviour
+    public class GameConfig : GameConfigBase
     {
-        public int RoundCount;
-        public int CupCount;
-        public int [] ShufflePerRound;
-        public int [] MinItemMoveCount;
-        public Vector2Int [] FalseShuffleRangePerRound;
-        public float ShuffleDuration;
+        [SerializeField] GameConfigAsset asset;
 
+        public float ShuffleDuration;
+        public int RoundCount { get { return asset.ShufflePerRound.Length; } }
         public float ShuffleInterval;
         public float RoundInterval;
         public float YMovement;
         public float CupSpacing;
+
+        public override GameConfigAssetBase Asset => asset;
+
+        public int CupCount { get { return asset.CupCount; } }
+        public int[] ShufflePerRound { get { return asset.ShufflePerRound; } }
+        public int[] MinItemMoveCount { get { return asset.MinItemMoveCount; } }
+        public Vector2Int[] FalseShuffleRangePerRound { get { return asset.FalseShuffleRangePerRound; } }
     }
 }

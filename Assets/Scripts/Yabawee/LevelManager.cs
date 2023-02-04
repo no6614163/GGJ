@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Yabawee
 {
-    public class LevelManager : MonoBehaviour
+    public class LevelManager : LevelManagerBase
     {
         int currentItemIndex;
         float cupYPos;
@@ -33,14 +33,14 @@ namespace Yabawee
         {
             chosenCup = cup;
         }
-        private void Awake()
+        protected virtual void Awake()
         {
             //TODO : config º¯°æ
             //--
             config = GetComponent<GameConfig>();
             InitGame();
         }
-        void InitGame()
+        protected override void InitGame()
         {
             cupOriginalPos = new Vector2[config.CupCount];
             cupYPos = referenceCup.anchoredPosition.y;
@@ -89,7 +89,7 @@ namespace Yabawee
         }
         IEnumerator RoundCoroutine(int round)
         {
-            float handMoveDuration = 1f;
+            float handMoveDuration = 1f * config.DurationScale;
             float[] dur = new float[] { 0.3f, 0.4f, 0.3f };
             foreach (var cup in cups)
                 cup.Clickable = false; 
@@ -143,14 +143,17 @@ namespace Yabawee
                 if (config.ShufflePerRound[round] - 1 - i < config.MinItemMoveCount[round] - itemShuffledCount)
                 {
                     shuffleTargets[0] = currentItemIndex;
-                    shuffleTargets[1] = Random.Range(0, cups.Length);
+                    List<int> candidates = new List<int>();
+                    candidates.AddRange(indicies);
+                    candidates.Remove(currentItemIndex);
+                    shuffleTargets[1] = HappyUtils.Random.RandomElement(candidates);
                 }
                 if (shuffleTargets[0] == itemShuffledCount || shuffleTargets[1] == itemShuffledCount)
                     itemShuffledCount++;
                 yield return StartCoroutine(Shuffle(new int[]{ shuffleTargets[0], shuffleTargets[1]}, doFalseShuffle[i]));
                 ArrangeHands();
                 if (i < config.ShufflePerRound[round] - 1)
-                    yield return new WaitForSeconds(config.ShuffleInterval);
+                    yield return new WaitForSeconds(config.ShuffleInterval * config.DurationScale);
             }
             item.gameObject.SetActive(true);
             item.transform.SetAsFirstSibling();
@@ -242,6 +245,7 @@ namespace Yabawee
         }
         IEnumerator ReturnHands(float duration = 1f)
         {
+            duration *= config.DurationScale;
             StartCoroutine(MoveHand(hands[0], handOriginalPos[0], duration));
             yield return StartCoroutine(MoveHand(hands[1], handOriginalPos[1], duration));
         }
@@ -275,7 +279,7 @@ namespace Yabawee
 
         IEnumerator Shuffle(int [] cupIndicies, bool falseShuffle)
         {
-            float handMoveDuration = 0.2f;
+            float handMoveDuration = 0.2f *config.DurationScale;
             if(cupIndicies[0] > cupIndicies[1])
             {
                 int tem = cupIndicies[0];
@@ -295,21 +299,21 @@ namespace Yabawee
             Vector2 cup0pos = cups[cupIndicies[0]].RectTransform.anchoredPosition;
             Vector2 cup1pos = cups[cupIndicies[1]].RectTransform.anchoredPosition;
             Vector2 center = (cup0pos + cup1pos) / 2;
-            StartCoroutine(MoveCup(cupIndicies[0], center + new Vector2(0, config.YMovement), config.ShuffleDuration/2));
-            StartCoroutine(MoveCup(cupIndicies[1], center - new Vector2(0, config.YMovement), config.ShuffleDuration/2));
-            yield return new WaitForSeconds(config.ShuffleDuration * 0.5f);
+            StartCoroutine(MoveCup(cupIndicies[0], center + new Vector2(0, config.YMovement), config.ShuffleDuration/ 2 * config.DurationScale));
+            StartCoroutine(MoveCup(cupIndicies[1], center - new Vector2(0, config.YMovement), config.ShuffleDuration/ 2 * config.DurationScale));
+            yield return new WaitForSeconds(config.ShuffleDuration * 0.5f * config.DurationScale);
 
             if (falseShuffle)
             {
-                StartCoroutine(MoveCup(cupIndicies[0], cup0pos, config.ShuffleDuration / 2));
-                StartCoroutine(MoveCup(cupIndicies[1], cup1pos, config.ShuffleDuration / 2));
+                StartCoroutine(MoveCup(cupIndicies[0], cup0pos, config.ShuffleDuration / 2 * config.DurationScale));
+                StartCoroutine(MoveCup(cupIndicies[1], cup1pos, config.ShuffleDuration / 2 * config.DurationScale));
             }
             else
             {
-                StartCoroutine(MoveCup(cupIndicies[0], cup1pos, config.ShuffleDuration / 2));
-                StartCoroutine(MoveCup(cupIndicies[1], cup0pos, config.ShuffleDuration / 2));
+                StartCoroutine(MoveCup(cupIndicies[0], cup1pos, config.ShuffleDuration / 2 * config.DurationScale));
+                StartCoroutine(MoveCup(cupIndicies[1], cup0pos, config.ShuffleDuration / 2 * config.DurationScale));
             }
-            yield return new WaitForSeconds(config.ShuffleDuration * 0.5f);
+            yield return new WaitForSeconds(config.ShuffleDuration * 0.5f * config.DurationScale);
 
             cups[cupIndicies[0]].SetRelease();
             cups[cupIndicies[1]].SetRelease();

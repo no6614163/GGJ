@@ -28,13 +28,13 @@ namespace JumpJump
                 scrollSpeed *= levelManager.Config.BgScrollSlow;
             foreach (var rectT in set1)
             {
-                rectT.anchoredPosition += new Vector2(-scrollSpeed, 0) * Time.deltaTime;
+                rectT.anchoredPosition += new Vector2(-scrollSpeed, 0) * Time.deltaTime * levelManager.Config.TimeScale;
                 if (rectT.anchoredPosition.x < -width)
                     rectT.anchoredPosition += new Vector2(width * 2, 0);
             }
             foreach (var rectT in set2)
             {
-                rectT.anchoredPosition += new Vector2(-scrollSpeed, 0) * Time.deltaTime;
+                rectT.anchoredPosition += new Vector2(-scrollSpeed, 0) * Time.deltaTime * levelManager.Config.TimeScale;
                 if (rectT.anchoredPosition.x < -width)
                     rectT.anchoredPosition += new Vector2(width * 2, 0);
             }

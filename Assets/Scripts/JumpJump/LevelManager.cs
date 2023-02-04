@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace JumpJump
 {
-    public class LevelManager : MonoBehaviour
+    public class LevelManager : LevelManagerBase
     {
 
-        public GameConfig Config;
+        public GameConfig Config { get; private set; }
 
         [SerializeField] Character characterPrefab;
         [SerializeField] Obstacle obstaclePrefab;
@@ -17,15 +17,16 @@ namespace JumpJump
         List<Character> characters;
         List<Obstacle> obstacles = new List<Obstacle>();
 
-        float elapsedTime = 0f;
         float scrolledAmount = 0;
         float nextSpawnDistance;
         bool isGameOver = false;
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+            Config = GetComponent<GameConfig>();
             InitGame();
         }
-        void InitGame()
+        protected override void InitGame()
         {
             characters = new List<Character>();
             for(int i=0; i<Config.Characters.Length; i++)
@@ -37,11 +38,12 @@ namespace JumpJump
             }
             characters.Sort((a, b) => (int)(b.Position.x - a.Position.x));
             nextSpawnDistance = ground.rect.width;
+            StartTimer();
         }
 
         IEnumerator DelayJumps()
         {
-            float totalDelay = 0.1f * Config.CharactersRandomness;
+            float totalDelay = 0.1f * Config.CharactersRandomness * Config.DurationScale;
             foreach (Character character in characters)
             {
                 character.Jump();
@@ -49,23 +51,22 @@ namespace JumpJump
                     yield return new WaitForSeconds(totalDelay / characters.Count);
             }
         }
+        public override void OnTimerEnd()
+        {
+            if (isGameOver)
+                return;
+            base.OnTimerEnd();
+            OnClear();
+        }
         private void Update()
         {
             if (!isGameOver && (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)))
             {
                 StartCoroutine(DelayJumps());
             }
-            if (!isGameOver)
-            {
-                elapsedTime += Time.deltaTime;
-                if (elapsedTime > Config.TimeLimit)
-                {
-                    OnClear();
-                }
-            }
             if(!isGameOver)
             {
-                scrolledAmount += Config.ScrollSpeed * Time.deltaTime;
+                scrolledAmount += Config.ScrollSpeed * Time.deltaTime * Config.TimeScale;
                 if (scrolledAmount >= nextSpawnDistance)
                 {
                     SpawnObstacle();
@@ -74,7 +75,7 @@ namespace JumpJump
             //obstacle 이동
             for (int i=0; i<obstacles.Count; i++)
             {
-                obstacles[i].Position += new Vector2(-Config.ScrollSpeed, 0) * Time.deltaTime;
+                obstacles[i].Position += new Vector2(-Config.ScrollSpeed, 0) * Time.deltaTime * Config.TimeScale;
                 if (obstacles[i].Position.x < -obstacleLayer.rect.width)
                 {
                     Obstacle ob = obstacles[i];
@@ -117,17 +118,15 @@ namespace JumpJump
         void OnGameOver()
         {
             isGameOver = true;
+            StopTimer();
             //TODO : 게임오버 (첫 양 충돌)
-            Debug.Log("게임오버!!");
             StartCoroutine(SlowScroll(0.5f, true));
         }
         void OnClear()
         {
             isGameOver = true;
             StartCoroutine(SlowScroll(0.3f, false));
-            //for (int i = 0; i < obstacles.Count; i++)
-            //        Destroy(obstacles[i].gameObject);
-            //obstacles.Clear();
+
         }
         void SpawnObstacle()
         {

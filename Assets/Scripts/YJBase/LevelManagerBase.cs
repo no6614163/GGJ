@@ -30,7 +30,6 @@ public abstract class LevelManagerBase : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
             gameUI.SetTimeSlider(1 - elapsedTime / _config.TimeLimit);
-            Debug.Log(elapsedTime / _config.TimeLimit);
             yield return null;
         }
         OnTimerEnd();

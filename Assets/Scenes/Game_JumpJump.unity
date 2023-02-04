@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &14860250
 Transform:
   m_ObjectHideFlags: 0
@@ -2337,8 +2337,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1685001299}
-  - component: {fileID: 1685001301}
   - component: {fileID: 1685001300}
+  - component: {fileID: 1685001301}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -2373,19 +2373,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84aec6fefed34154e803d88ab54917b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Characters:
-  - {fileID: 21300000, guid: bff5700ee5cbb4847b94455036581f68, type: 3}
-  - {fileID: 21300000, guid: ca1806efeaa8a4743b359254b5346414, type: 3}
-  - {fileID: 21300000, guid: bff5700ee5cbb4847b94455036581f68, type: 3}
-  - {fileID: 21300000, guid: ca1806efeaa8a4743b359254b5346414, type: 3}
-  - {fileID: 21300000, guid: bff5700ee5cbb4847b94455036581f68, type: 3}
+  asset: {fileID: 11400000, guid: dfb95ca735db3474980baec4b5afc1e0, type: 2}
   ScrollSpeed: 500
   BgScrollSlow: 0.5
-  TimeLimit: 20
   CharactersRandomness: 1
   JumpPower: 1300
   Gravity: 2400
-  ObstacleDistanceRange: {x: 600, y: 900}
 --- !u!114 &1685001301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2398,7 +2391,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7359c3555354e043b596b25e674cf70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Config: {fileID: 1685001300}
   characterPrefab: {fileID: 7528132725830085498, guid: 4bc4aa632a3cd994faa448969fed7570, type: 3}
   obstaclePrefab: {fileID: 6828867160616683113, guid: feb650a55bd7ad640aa93f0b03ce60b2, type: 3}
   characterLayer: {fileID: 979910104}

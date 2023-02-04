@@ -50,8 +50,8 @@ namespace JumpJump
             }
             else
             {
-                velocity -= levelManager.Config.Gravity * Time.deltaTime;
-                Position += new Vector2(0, velocity) * Time.deltaTime;
+                velocity -= levelManager.Config.Gravity * Time.deltaTime * levelManager.Config.TimeScale;
+                Position += new Vector2(0, velocity) * Time.deltaTime * levelManager.Config.TimeScale;
             }
         }
         public void Jump()

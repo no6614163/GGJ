@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 namespace SlidingPuzzle
 {
-    public class LevelManager : MonoBehaviour
+    public class LevelManager : LevelManagerBase
     {
         [SerializeField] Piece piecePrefab;
         [SerializeField] RectTransform grid;
+
         GameConfig config;
 
         Vector2Int emptyPos;
@@ -17,19 +18,17 @@ namespace SlidingPuzzle
         int boardSize;
         float cellSize;
 
-        bool isGameOver = false;
-
-        float elapsedTime = 0f;
         bool isPieceMoving = false;
-        private void Awake()
+        static int currentPicture = 0;
+        protected override void Awake()
         {
+            base.Awake();
             config = GetComponent<GameConfig>();
             InitGame();
         }
-        void InitGame()
+        protected override void InitGame()
         {
             boardSize = (int)config.BoardSize;
-            int currentPicture = 0;
             cellSize = grid.rect.width / boardSize;
 
 
@@ -66,6 +65,9 @@ namespace SlidingPuzzle
                 }
             }
             Shuffle();
+            StartTimer();
+
+            currentPicture = (currentPicture + 1) % config.Pictures.Length;
         }
         void Shuffle()
         {
@@ -100,18 +102,20 @@ namespace SlidingPuzzle
                 }
             }
         }
-        private void Update()
+        public override void OnTimerEnd()
         {
-            elapsedTime += Time.deltaTime;
-            if (!isGameOver && !isPieceMoving && elapsedTime >= config.TimeLimit)
-            {
-                SetClickable(false);
-                GameOver();
-            }
+            base.OnTimerEnd();
+            SetClickable(false);
+            StartCoroutine(WaitForMoving());
+        }
+        IEnumerator WaitForMoving()
+        {
+            while (isPieceMoving)
+                yield return null;
+            GameOver();
         }
         void GameOver()
         {
-            isGameOver = true;
             UI_Manager.Instance.ShowPopupUI<UI_FailedPopup>();
         }
         public bool OnPieceClicked(Piece piece)
@@ -155,6 +159,7 @@ namespace SlidingPuzzle
             }
             yield return new WaitForSeconds(1f);
             UI_Manager.Instance.ShowPopupUI<UI_ClearPopup>();
+            StopTimer();
         }
         bool CheckGameClear()
         {
