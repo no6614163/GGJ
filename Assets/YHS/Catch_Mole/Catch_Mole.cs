@@ -11,13 +11,13 @@ public class Catch_Mole : Singleton<Catch_Mole>
     int pluscount;
     GameObject obj1;
     GameObject obj2;
-
+    bool GameOver = false;
     // Start is called before the first frame update
     void Start()
     {
         obj1 = GameObject.Find("Catch");
-        obj2 = GameObject.Find("mole");
-
+        obj2 = GameObject.Find("Catch");
+        Time.timeScale = 1;
     }
     private void Awake()
     {
@@ -31,16 +31,16 @@ public class Catch_Mole : Singleton<Catch_Mole>
 
         value = 1 - (lefttime / 20);
         UI_Game.SetTimeSlider(value);
-        
     }
     public void MoleNotHitted()
     {
         total_count++;
-        if (total_count > 2)
+        if (obj2.GetComponent<Catching>().m_End==false&&total_count == 3)
         {
+            obj2.GetComponent<Catching>().m_End = true;
             UI_Manager.Instance.ShowPopupUI<UI_FailedPopup>();
             SoundManager.Instance.PlaySFXPitched("end", "MoleSound", 0.02f);
-            Time.timeScale = 0;
+            GameOver = true;
         }
     }
 

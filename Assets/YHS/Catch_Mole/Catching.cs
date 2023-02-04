@@ -9,13 +9,14 @@ public class Catching : MonoBehaviour
     GameObject obj2;
     public float TimeLimit = 20f;
     public float time = 0f;
-    private bool m_End = false;
+    public bool m_End = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        obj = GameObject.Find("mole");
+        obj = GameObject.Find("Catch_Mole");
         obj2 = GameObject.Find("mole");
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
@@ -46,17 +47,22 @@ public class Catching : MonoBehaviour
             return;
 
         time += Time.deltaTime;
-        if (time >= TimeLimit)
+        if (m_End==false&&time >= TimeLimit)
         {
             Debug.Log("Å¬¸®¾î");
             m_End = true;
             time = 0f;
             if (GameSystem.Instance.CurrentStage == Constants.MaxStageCount)
+            {
                 UI_Manager.Instance.ShowPopupUI<UI_SuccessPopup>();
+                SoundManager.Instance.PlaySFXPitched("clear", "MoleSound", 0.02f);
+            }
             else
+            {
                 UI_Manager.Instance.ShowPopupUI<UI_ClearPopup>();
-            SoundManager.Instance.PlaySFXPitched("clear", "MoleSound", 0.02f);
-            Time.timeScale = 0;
+                SoundManager.Instance.PlaySFXPitched("clear", "MoleSound", 0.02f);
+            }
+            
         }
 
         //void GameOver()
