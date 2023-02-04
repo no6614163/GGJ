@@ -18,7 +18,11 @@ public class UI_SuccessPopup : UI_Popup
         Text_Stage3,
         Text_Stage4,
         Text_Stage5,
-
+        Text_StageClear1,
+        Text_StageClear2,
+        Text_StageClear3,
+        Text_StageClear4,
+        Text_StageClear5,
     }
 
     enum Images
@@ -43,6 +47,8 @@ public class UI_SuccessPopup : UI_Popup
             // TODO : 애니메이션 실행
             Get<TMP_Text>((int)Texts.Text_Stage + i+1).text = string.Format("Stage {0} : {1}", i+1, GameSystem.Instance.ScoreArray[i]);
         }
+
+        // TODO : 애니메이션 순차로 실행해야됨.
     }
 
     void OnButtonClickedOut(PointerEventData evt)
