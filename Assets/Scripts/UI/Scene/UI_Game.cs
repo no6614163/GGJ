@@ -38,6 +38,7 @@ public class UI_Game : UI_Scene
     public override void Init()
     {
         base.Init();
+        SoundManager.Instance.PlaySFXPitched("background", "Lobby", 0.02f);
         Bind<TMP_Text>(typeof(Texts));
         Bind<Image>(typeof(Images));
         Bind<Slider>(typeof(Sliders));

@@ -12,6 +12,7 @@ public class LobbyScene : MonoBehaviour
     {
         // NOTE : юс╫ц
         UI_Manager.Instance.ShowSceneUI<UI_Lobby>();
+        SoundManager.Instance.PlaySFXPitched("background", "Lobby", 0.02f);
     }
 
 
