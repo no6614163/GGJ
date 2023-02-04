@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -42,13 +43,15 @@ public class UI_SuccessPopup : UI_Popup
     }
     void PlayAnimation()
     {
+        Sequence seq = DOTween.Sequence();
+
         for (int i = 0; i < Constants.MaxStageCount; i++)
         {
             // TODO : 애니메이션 실행
-            Get<TMP_Text>((int)Texts.Text_Stage + i+1).text = string.Format("Stage {0} : {1}", i+1, GameSystem.Instance.ScoreArray[i]);
+            seq.Append(Get<TMP_Text>((int)Texts.Text_Stage + i + 1).DOText(string.Format("Stage {0} : {1}", i + 1, GameSystem.Instance.ScoreArray[i]), 1));
         }
 
-        // TODO : 애니메이션 순차로 실행해야됨.
+        seq.Play();
     }
 
     void OnButtonClickedOut(PointerEventData evt)
