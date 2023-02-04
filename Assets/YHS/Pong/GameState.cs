@@ -32,7 +32,7 @@ public class GameState : MonoBehaviour
     {
         if(col.gameObject.name=="ball")
         {
-            //Time.timeScale = 0;
+            Time.timeScale = 0;
             Debug.Log("½ÇÆÐ");
             UI_Manager.Instance.ShowPopupUI<UI_FailedPopup>();
         }

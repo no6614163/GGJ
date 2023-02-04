@@ -9,6 +9,7 @@ public class Ball : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+        level = GameSystem.Instance.GameLevel;
         if(level==1)
         {
             speed = 8f;

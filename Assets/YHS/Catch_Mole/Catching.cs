@@ -48,6 +48,7 @@ public class Catching : MonoBehaviour
             m_End = true;
             time = 0f;
             UI_Manager.Instance.ShowPopupUI<UI_ClearPopup>();
+            Time.timeScale = 0;
         }
 
         //void GameOver()
