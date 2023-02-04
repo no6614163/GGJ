@@ -369,7 +369,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &372671112
 Transform:
   m_ObjectHideFlags: 0
@@ -979,6 +979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aef273605b8a5c843910506c7b7fc167, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 3d5e2fc48bdc8a34297382ee6bd24e0b, type: 2}
   CardImages:
   - {fileID: 21300000, guid: dfa639ecef1783b4ab9768d55bc9464c, type: 3}
   - {fileID: 21300000, guid: 7bab5b2c4238e25418527426a212bbad, type: 3}
@@ -990,9 +991,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ede8aab80a49d3b428e9b53f2ce25b95, type: 3}
   - {fileID: 21300000, guid: fe3143dd40eef5841b2706856f26e586, type: 3}
   rowCount: 4
-  colCount: 4
-  TimeLimit: 20
-  InitialShowingTime: 1
   CardShowDuration: 0.5
 --- !u!4 &1663775131
 Transform:

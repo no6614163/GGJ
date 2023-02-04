@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace CardMatch
 {
-    public class LevelManager : MonoBehaviour
+    public class LevelManager : LevelManagerBase
     {
         GameConfig config;
         public GameConfig Config { get { return config; } }
@@ -18,15 +18,14 @@ namespace CardMatch
 
         int wrongCount = 0;
         int matchedCards = 0;
-        float elapsedTime = 0f;
 
-        bool isTicking = false;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+            config = GetComponent<GameConfig>();
             //TODO : config 변경
             //--
-            config = GetComponent<GameConfig>();
             InitGame();
         }
         private void Start()
@@ -43,7 +42,7 @@ namespace CardMatch
             yield return new WaitForSeconds(config.InitialShowingTime);
 
             //TODO : Start!!
-            isTicking = true;
+            StartTimer();
             for (int i = 0; i < cards.Count; i++)
             {
                 cards[i].Clickable = true;
@@ -55,10 +54,10 @@ namespace CardMatch
             yield return new WaitForSeconds(config.InitialShowingTime);
             card.SetDesiredState(false);
         }
-        void InitGame()
+        protected override void InitGame()
         {
             List<Sprite> cardImages = new List<Sprite>();
-            cardImages.AddRange(HappyUtils.Random.RandomElements(config.CardImages, config.colCount * config.rowCount / 2));
+            cardImages.AddRange(HappyUtils.Random.RandomElements(config.CardImages, config.ColCount * config.rowCount / 2));
             cardImages.AddRange(cardImages);
             HappyUtils.Random.Shuffle(cardImages);
             for(int i=0; i<cardImages.Count; i++)
@@ -106,31 +105,17 @@ namespace CardMatch
             matchedCards += 2;
             if(matchedCards == cards.Count)
             {
-                isTicking = false;
                 OnGameClear();
             }
         }
-        private void Update()
-        {
-            if (!isTicking)
-                return;
-            if (elapsedTime < config.TimeLimit)
-            {
-                elapsedTime += Time.deltaTime;
-            }
-            else
-            {
-                isTicking = false;
-                OnTimeOut();
-            }
-        }
-        void OnTimeOut()
+        public override void OnTimerEnd()
         {
             Debug.Log("제한시간 초과로 패배!");
             UI_Manager.Instance.ShowPopupUI<UI_FailedPopup>();
         }
         void OnGameClear()
         {
+            StopTimer();
             Debug.Log("게임 클리어!");
             UI_Manager.Instance.ShowPopupUI<UI_ClearPopup>();
         }
