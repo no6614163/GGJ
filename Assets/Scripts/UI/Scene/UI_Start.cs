@@ -31,13 +31,12 @@ public class UI_Start : UI_Scene
         Get<TMP_Text>((int)Texts.Text_Settings).gameObject.BindEvent(OnButtonClickedSettings);
         Get<TMP_Text>((int)Texts.Text_Credits).gameObject.BindEvent(OnButtonClickedCredits);
         Get<TMP_Text>((int)Texts.Text_Quit).gameObject.BindEvent(OnButtonClickedQuit);
-
     }
 
     void OnButtonClickedStart(PointerEventData evt)
     {
         Debug.Log("Start");
-        //SceneManager.LoadScene((int)Scene.Lobby);
+        GameSystem.Instance.LoadScene((int)SceneType.Lobby);
     }
 
     void OnButtonClickedSettings(PointerEventData evt)
