@@ -49,6 +49,7 @@ public class UI_WarningPopup : UI_Popup
 
     void OnButtonClickedBack(PointerEventData evt)
     {
+        SoundManager.Instance.PlaySFX("Click", "GameCommon");
         // TODO : 애니메이션들 넣어주면 좋음.
         Debug.Log("back");
         UI_Manager.Instance.ClosePopupUI();

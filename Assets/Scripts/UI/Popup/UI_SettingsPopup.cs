@@ -44,6 +44,7 @@ public class UI_SettingsPopup : UI_Popup
 
     void OnButtonClickedBack(PointerEventData evt)
     {
+        SoundManager.Instance.PlaySFX("Click", "GameCommon");
         Debug.Log("Back");
         Time.timeScale = 1;
         var rect = transform.GetChild(0).GetComponent<RectTransform>();
@@ -52,6 +53,7 @@ public class UI_SettingsPopup : UI_Popup
 
     void OnButtonClickedQuit(PointerEventData evt)
     {
+        SoundManager.Instance.PlaySFX("Click", "GameCommon");
         Debug.Log("Quit");
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;

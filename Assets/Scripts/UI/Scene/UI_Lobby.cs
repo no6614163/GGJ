@@ -84,6 +84,7 @@ public class UI_Lobby : UI_Scene
 
     void OnButtonClickedStart(PointerEventData evt)
     {
+        SoundManager.Instance.PlaySFX("Click", "GameCommon");
         UI_Manager.Instance.ShowPopupUI<UI_LevelPopup>();
         //if (!m_DoAnim)
         //{
@@ -100,30 +101,34 @@ public class UI_Lobby : UI_Scene
 
     void OnButtonClickedSettings(PointerEventData evt)
     {
-        if (!m_DoAnim)
-        {
-            m_DoAnim = true;
-            Debug.Log("Settings");
-            var popup = UI_Manager.Instance.ShowPopupUI<UI_SettingsPopup>();
-            var rect = popup.transform.GetChild(0).GetComponent<RectTransform>();
-            rect.localScale = Vector3.zero;
-            rect.DOKill();
-            rect.DOScale(1, 0.5f).OnComplete(() => { m_DoAnim = false; });
-        }
+        SoundManager.Instance.PlaySFX("Click", "GameCommon");
+        var popup = UI_Manager.Instance.ShowPopupUI<UI_SettingsPopup>();
+        //if (!m_DoAnim)
+        //{
+        //    m_DoAnim = true;
+        //    Debug.Log("Settings");
+        //    var popup = UI_Manager.Instance.ShowPopupUI<UI_SettingsPopup>();
+        //    var rect = popup.transform.GetChild(0).GetComponent<RectTransform>();
+        //    rect.localScale = Vector3.zero;
+        //    rect.DOKill();
+        //    rect.DOScale(1, 0.5f).OnComplete(() => { m_DoAnim = false; });
+        //}
     }
 
     void OnButtonClickedShop(PointerEventData evt)
     {
-        if (!m_DoAnim)
-        {
-            m_DoAnim = true;
-            Debug.Log("Shop");
-            var popup = UI_Manager.Instance.ShowPopupUI<UI_ShopPopup>();
-            var rect = popup.transform.GetChild(0).GetComponent<RectTransform>();
-            rect.anchoredPosition = new Vector2(-2000, 0);
-            rect.DOKill();
-            rect.DOAnchorPosX(0, 1.5f).OnComplete(() => { m_DoAnim = false; });
-        }
+        SoundManager.Instance.PlaySFX("Click", "GameCommon");
+        var popup = UI_Manager.Instance.ShowPopupUI<UI_ShopPopup>();
+        //if (!m_DoAnim)
+        //{
+        //    m_DoAnim = true;
+        //    Debug.Log("Shop");
+        //    var popup = UI_Manager.Instance.ShowPopupUI<UI_ShopPopup>();
+        //    var rect = popup.transform.GetChild(0).GetComponent<RectTransform>();
+        //    rect.anchoredPosition = new Vector2(-2000, 0);
+        //    rect.DOKill();
+        //    rect.DOAnchorPosX(0, 1.5f).OnComplete(() => { m_DoAnim = false; });
+        //}
     }
 
 

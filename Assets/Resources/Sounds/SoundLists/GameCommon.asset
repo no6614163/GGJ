@@ -19,7 +19,7 @@ MonoBehaviour:
     _volume: 0.5
   - _name: Click
     _clip: {fileID: 8300000, guid: 6392820df352197438e486086037e9da, type: 3}
-    _volume: 0.5
+    _volume: 0.505
   - _name: Correct
     _clip: {fileID: 8300000, guid: b49002a66e090469eaf946684e9ef9f0, type: 3}
     _volume: 0.5

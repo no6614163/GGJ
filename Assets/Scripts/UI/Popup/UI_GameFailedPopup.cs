@@ -45,6 +45,7 @@ public class UI_GameFailedPopup : UI_Popup
 
     void OnButtonClickedOut(PointerEventData evt)
     {
+        SoundManager.Instance.PlaySFX("Click", "GameCommon");
         // TODO : 애니메이션들 넣어주면 좋음.
         Debug.Log("Out");
         GameSystem.Instance.LoadScene((int)SceneType.Start);

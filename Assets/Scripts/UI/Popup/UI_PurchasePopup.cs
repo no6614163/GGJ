@@ -71,7 +71,7 @@ public class UI_PurchasePopup : UI_Popup
                     }
                     break;
             }
-
+            SoundManager.Instance.PlaySFX("Cash", "UI");
             EventManager.Instance.GameEvent.InvokePurchaseItem();
             UI_Manager.Instance.ClosePopupUI();
         }
@@ -86,6 +86,7 @@ public class UI_PurchasePopup : UI_Popup
 
     void OnButtonClickedCancel(PointerEventData evt)
     {
+        SoundManager.Instance.PlaySFX("Click", "GameCommon");
         // √Îº“
         UI_Manager.Instance.ClosePopupUI();
     }

@@ -55,6 +55,7 @@ public class UI_LevelPopup : UI_Popup
 
     void OnButtonClickedBack(PointerEventData evt)
     {
+        SoundManager.Instance.PlaySFX("Click", "GameCommon");
         // TODO : 애니메이션들 넣어주면 좋음.
         Debug.Log("Out");
         //UI_Manager.Instance.ClosePopupUI();
@@ -68,6 +69,7 @@ public class UI_LevelPopup : UI_Popup
 
     void OnButtonClickedStart(PointerEventData evt)
     {
+        SoundManager.Instance.PlaySFX("Click", "GameCommon");
         // TODO : 애니메이션들 넣어주면 좋음.
         Debug.Log("Out");
         if(m_Level == -1)
@@ -86,6 +88,7 @@ public class UI_LevelPopup : UI_Popup
 
     void OnButtonClickedVeryEasy(PointerEventData evt)
     {
+        SoundManager.Instance.PlaySFX("Click", "GameCommon");
         m_Level = 0;
         Get<TMP_Text>((int)Texts.Text_Description).text = "Selected Level : Very Easy";
         GameSystem.Instance.SetGameLevel(0);
@@ -93,6 +96,7 @@ public class UI_LevelPopup : UI_Popup
 
     void OnButtonClickedEasy(PointerEventData evt)
     {
+        SoundManager.Instance.PlaySFX("Click", "GameCommon");
         m_Level = 1;
         Get<TMP_Text>((int)Texts.Text_Description).text = "Selected Level : Easy";
         GameSystem.Instance.SetGameLevel(1);
@@ -100,6 +104,7 @@ public class UI_LevelPopup : UI_Popup
 
     void OnButtonClickedNormal(PointerEventData evt)
     {
+        SoundManager.Instance.PlaySFX("Click", "GameCommon");
         m_Level = 2;
         Get<TMP_Text>((int)Texts.Text_Description).text = "Selected Level : Normal";
         GameSystem.Instance.SetGameLevel(2);
@@ -107,6 +112,7 @@ public class UI_LevelPopup : UI_Popup
 
     void OnButtonClickedHard(PointerEventData evt)
     {
+        SoundManager.Instance.PlaySFX("Click", "GameCommon");
         m_Level = 3;
         Get<TMP_Text>((int)Texts.Text_Description).text = "Selected Level : Hard";
         GameSystem.Instance.SetGameLevel(3);
@@ -114,6 +120,7 @@ public class UI_LevelPopup : UI_Popup
 
     void OnButtonClickedVeryHard(PointerEventData evt)
     {
+        SoundManager.Instance.PlaySFX("Click", "GameCommon");
         m_Level = 4;
         Get<TMP_Text>((int)Texts.Text_Description).text = "Selected Level : Very Hard";
         GameSystem.Instance.SetGameLevel(4);

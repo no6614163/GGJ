@@ -36,12 +36,14 @@ public class UI_Start : UI_Scene
 
     void OnButtonClickedStart(PointerEventData evt)
     {
+        SoundManager.Instance.PlaySFX("Click", "GameCommon");
         Debug.Log("Start");
         GameSystem.Instance.LoadScene((int)SceneType.Lobby);
     }
 
     void OnButtonClickedSettings(PointerEventData evt)
     {
+        SoundManager.Instance.PlaySFX("Click", "GameCommon");
         Debug.Log("Settings");
         //UI_Manager.Instance.ShowPopupUI<UI_SettingsPopup>();
         var popup = UI_Manager.Instance.ShowPopupUI<UI_SettingsPopup>();
@@ -53,6 +55,7 @@ public class UI_Start : UI_Scene
 
     void OnButtonClickedCredits(PointerEventData evt)
     {
+        SoundManager.Instance.PlaySFX("Click", "GameCommon");
         Debug.Log("Credits");
         var popup = UI_Manager.Instance.ShowPopupUI<UI_CreditsPopup>();
         var rect = popup.transform.GetChild(0).GetComponent<RectTransform>();
@@ -62,6 +65,7 @@ public class UI_Start : UI_Scene
 
     void OnButtonClickedQuit(PointerEventData evt)
     {
+        SoundManager.Instance.PlaySFX("Click", "GameCommon");
         Debug.Log("Quit");
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
