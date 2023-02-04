@@ -18,6 +18,11 @@ public class UI_FailedPopup : UI_Popup
         Text_Stage3,
         Text_Stage4,
         Text_Stage5,
+        Text_StageClear1,
+        Text_StageClear2,
+        Text_StageClear3,
+        Text_StageClear4,
+        Text_StageClear5,
 
     }
 

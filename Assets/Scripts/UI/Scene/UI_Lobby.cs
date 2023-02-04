@@ -64,10 +64,7 @@ public class UI_Lobby : UI_Scene
     void OnButtonClickedStart(PointerEventData evt)
     {
         Debug.Log("Start");
-        GameSystem.Instance.SetNextDay();
-        // TODO : 랜덤으로 씬 타입 정한 후 게임 시작
-        int rand = Random.Range(2, 4);
-        GameSystem.Instance.LoadScene(rand);
+        UI_Manager.Instance.ShowPopupUI<UI_LevelPopup>();
     }
 
     void OnButtonClickedSettings(PointerEventData evt)
