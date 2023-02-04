@@ -19,3 +19,10 @@ public enum SceneType
     Game_Card,
     Game_Pong,
 }
+
+public enum ItemType
+{
+    Food,
+    Happy,
+    Spawn,
+}

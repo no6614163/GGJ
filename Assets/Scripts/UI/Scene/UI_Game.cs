@@ -44,12 +44,6 @@ public class UI_Game : UI_Scene
         UI_Manager.Instance.ShowPopupUI<UI_SettingsPopup>();
     }
 
-    void OnButtonClickedShop(PointerEventData evt)
-    {
-        Debug.Log("Shop");
-        UI_Manager.Instance.ShowPopupUI<UI_ShopPopup>();
-    }
-
     /// <summary>
     ///  UI Slider의 수치 입력
     ///  value = 남은 시간, 0은 failed, 시작 시간 : 1
