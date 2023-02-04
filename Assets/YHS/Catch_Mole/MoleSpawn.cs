@@ -13,15 +13,15 @@ public class MoleSpawn : MonoBehaviour
     private void Awake()
     {
         if (level == 1)
-            spawnTime = 1.3f;
+            spawnTime = 1.4f;
         if (level == 2)
-            spawnTime = 1.1f;
+            spawnTime = 1.2f;
         if (level == 3)
-            spawnTime = 0.9f;
+            spawnTime = 1.0f;
         if (level == 4)
-            spawnTime = 0.7f;
+            spawnTime = 0.9f;
         if (level == 5)
-            spawnTime = 0.5f;
+            spawnTime = 0.7f;
     }
     void Start()
     {

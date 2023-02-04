@@ -507,7 +507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f464f8a3d8dc5864bb3b5fc42316f928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 5
+  level: 3
   moles:
   - {fileID: 832370579}
   - {fileID: 470039339}

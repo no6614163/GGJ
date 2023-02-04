@@ -15,19 +15,19 @@ public class Ball : MonoBehaviour
         }
         if(level==2)
         {
-            speed = 12f;
+            speed = 11f;
         }
         if(level==3)
         {
-            speed = 15f;
+            speed = 13f;
         }
         if(level==4)
         {
-            speed = 18f;
+            speed = 16f;
         }
         if(level==5)
         {
-            speed = 21f;
+            speed = 19f;
         }
     }
     void Start()
