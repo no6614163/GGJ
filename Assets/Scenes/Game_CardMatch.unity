@@ -781,7 +781,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aef273605b8a5c843910506c7b7fc167, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: f5b7ce4c9e5ba304383e4ee7ef1206ab, type: 2}
+  assets:
+  - {fileID: 11400000, guid: f5b7ce4c9e5ba304383e4ee7ef1206ab, type: 2}
+  - {fileID: 11400000, guid: 3d5e2fc48bdc8a34297382ee6bd24e0b, type: 2}
+  - {fileID: 11400000, guid: 3b25ec503ad65974cba0a67c6f1dd78c, type: 2}
+  - {fileID: 11400000, guid: 7385a607f3a324b4aa7c87cfaa0cd8b9, type: 2}
+  - {fileID: 11400000, guid: 3ce9a0613e585d9429d00cd21dedda56, type: 2}
   CardImages:
   - {fileID: -2030953043, guid: 6c5c453accfaa81448010b7c59fac4a2, type: 3}
   - {fileID: -1481021403, guid: 6c5c453accfaa81448010b7c59fac4a2, type: 3}

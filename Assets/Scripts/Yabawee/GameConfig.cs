@@ -6,7 +6,11 @@ namespace Yabawee
 {
     public class GameConfig : GameConfigBase
     {
-        [SerializeField] GameConfigAsset asset;
+        [SerializeField] GameConfigAsset[] assets;
+        GameConfigAsset asset {
+            get { return assets[GameSystem.Instance.GameLevel]; }
+        }
+        
 
         public float ShuffleDuration;
         public int RoundCount { get { return asset.ShufflePerRound.Length; } }
@@ -21,5 +25,6 @@ namespace Yabawee
         public int[] ShufflePerRound { get { return asset.ShufflePerRound; } }
         public int[] MinItemMoveCount { get { return asset.MinItemMoveCount; } }
         public Vector2Int[] FalseShuffleRangePerRound { get { return asset.FalseShuffleRangePerRound; } }
+
     }
 }

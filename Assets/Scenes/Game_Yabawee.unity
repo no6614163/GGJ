@@ -1028,7 +1028,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 425c452263150614cb7eb5cf7e0bde1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asset: {fileID: 11400000, guid: 7b4cfcec0c2ffb6428d5055d6da60a8c, type: 2}
+  assets:
+  - {fileID: 11400000, guid: 7b4cfcec0c2ffb6428d5055d6da60a8c, type: 2}
+  - {fileID: 11400000, guid: 4e2182add4ebcb2458d012bde57adaf5, type: 2}
+  - {fileID: 11400000, guid: b004dabbbe2e44b4ebf7b28cf2f92421, type: 2}
+  - {fileID: 11400000, guid: f9dfb41d14c37554b96d929cc497f358, type: 2}
+  - {fileID: 11400000, guid: e654604883db7e5489b558b2add65f52, type: 2}
   ShuffleDuration: 0.7
   ShuffleInterval: 0.5
   RoundInterval: 0.5

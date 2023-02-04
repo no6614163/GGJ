@@ -6,7 +6,11 @@ namespace JumpJump
 {
     public class GameConfig : GameConfigBase
     {
-        [SerializeField] GameConfigAsset asset;
+        [SerializeField] GameConfigAsset[] assets;
+        GameConfigAsset asset
+        {
+            get { return assets[GameSystem.Instance.GameLevel]; }
+        }
         public float ScrollSpeed;
         public float BgScrollSlow;
         public float CharactersRandomness;

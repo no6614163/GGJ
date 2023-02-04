@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80dffde2bc9153c4d9b8b38cdf613ef8, type: 3}
-  m_Name: 1
+  m_Script: {fileID: 11500000, guid: 977492279472bed408e69322eee30742, type: 3}
+  m_Name: 3
   m_EditorClassIdentifier: 
   TimeScale: 1
-  TimeLimit: 7
-  Characters:
-  - {fileID: -1848844473, guid: 6c5c453accfaa81448010b7c59fac4a2, type: 3}
-  ObstacleDistanceRange: {x: 700, y: 1500}
+  TimeLimit: 25
+  ColCount: 4
+  InitialShowingTime: 1

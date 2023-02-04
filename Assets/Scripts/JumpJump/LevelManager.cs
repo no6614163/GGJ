@@ -84,6 +84,8 @@ namespace JumpJump
                     i--;
                 }
             }
+            if (isClear)
+                return;
             //충돌체크
             foreach(Character character in characters)
             {
@@ -110,7 +112,10 @@ namespace JumpJump
             }
             Config.ScrollSpeed = 0f;
             if(isLose)
+            {
+                yield return new WaitForSeconds(1);
                 UI_Manager.Instance.ShowPopupUI<UI_FailedPopup>();
+            }
             else
             {
                 yield return new WaitForSeconds(2);
@@ -125,8 +130,10 @@ namespace JumpJump
             //TODO : 게임오버 (첫 양 충돌)
             StartCoroutine(SlowScroll(0.5f, true));
         }
+        bool isClear = false;
         void OnClear()
         {
+            isClear = true;
             isGameOver = true;
             foreach (var ch in characters)
                 ch.OnWin();

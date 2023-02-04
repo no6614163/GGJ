@@ -2385,7 +2385,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84aec6fefed34154e803d88ab54917b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asset: {fileID: 11400000, guid: dfb95ca735db3474980baec4b5afc1e0, type: 2}
+  assets:
+  - {fileID: 11400000, guid: a5d20f17744e97a4ca99788854c26171, type: 2}
+  - {fileID: 11400000, guid: dfb95ca735db3474980baec4b5afc1e0, type: 2}
+  - {fileID: 11400000, guid: a48cdb2e35d76734cbbd5e117d6024fd, type: 2}
+  - {fileID: 11400000, guid: 40c8b74a6a587394589fc9e8b36931d6, type: 2}
+  - {fileID: 11400000, guid: 724159432873ae94cb66213d5a87057f, type: 2}
   ScrollSpeed: 600
   BgScrollSlow: 0.5
   CharactersRandomness: 2

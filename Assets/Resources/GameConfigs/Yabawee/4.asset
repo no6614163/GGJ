@@ -9,10 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 977492279472bed408e69322eee30742, type: 3}
-  m_Name: 2
+  m_Script: {fileID: 11500000, guid: 7cb062889ea9a5249aaadc908c2693de, type: 3}
+  m_Name: 4
   m_EditorClassIdentifier: 
-  TimeScale: 1
+  TimeScale: 2
   TimeLimit: 20
-  ColCount: 3
-  InitialShowingTime: 1
+  CupCount: 4
+  ShufflePerRound: 05000000080000000c000000
+  MinItemMoveCount: 030000000500000008000000
+  FalseShuffleRangePerRound:
+  - {x: 1, y: 2}
+  - {x: 2, y: 3}
+  - {x: 2, y: 4}

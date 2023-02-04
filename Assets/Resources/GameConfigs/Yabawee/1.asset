@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimeScale: 1
   TimeLimit: 20
-  CupCount: 4
-  ShufflePerRound: 030000000400000006000000
-  MinItemMoveCount: 020000000300000004000000
+  CupCount: 3
+  ShufflePerRound: 030000000400000008000000
+  MinItemMoveCount: 020000000300000006000000
   FalseShuffleRangePerRound:
+  - {x: 0, y: 0}
   - {x: 1, y: 1}
-  - {x: 1, y: 2}
-  - {x: 2, y: 3}
+  - {x: 2, y: 4}
