@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
+using DG.Tweening;
 public class UI_Lobby : UI_Scene
 {
     enum Texts
@@ -33,6 +33,8 @@ public class UI_Lobby : UI_Scene
         Slider_Happy,
         Slider_Food,
     }
+
+    private bool m_DoAnim = false;
 
     public override void Init()
     {
@@ -82,20 +84,46 @@ public class UI_Lobby : UI_Scene
 
     void OnButtonClickedStart(PointerEventData evt)
     {
-        Debug.Log("Start");
         UI_Manager.Instance.ShowPopupUI<UI_LevelPopup>();
+        //if (!m_DoAnim)
+        //{
+        //    m_DoAnim = true;
+        //    Debug.Log("Start");
+            
+        //    var popup = UI_Manager.Instance.ShowPopupUI<UI_LevelPopup>();
+        //    var rect = popup.transform.GetChild(0).GetComponent<RectTransform>();
+        //    rect.localScale = Vector3.zero;
+        //    rect.DOKill();
+        //    rect.DOScale(1, 0.5f).OnComplete(() => { m_DoAnim = false; });
+        //}
     }
 
     void OnButtonClickedSettings(PointerEventData evt)
     {
-        Debug.Log("Settings");
-        UI_Manager.Instance.ShowPopupUI<UI_SettingsPopup>();
+        if (!m_DoAnim)
+        {
+            m_DoAnim = true;
+            Debug.Log("Settings");
+            var popup = UI_Manager.Instance.ShowPopupUI<UI_SettingsPopup>();
+            var rect = popup.transform.GetChild(0).GetComponent<RectTransform>();
+            rect.localScale = Vector3.zero;
+            rect.DOKill();
+            rect.DOScale(1, 0.5f).OnComplete(() => { m_DoAnim = false; });
+        }
     }
 
     void OnButtonClickedShop(PointerEventData evt)
     {
-        Debug.Log("Shop");
-        UI_Manager.Instance.ShowPopupUI<UI_ShopPopup>();
+        if (!m_DoAnim)
+        {
+            m_DoAnim = true;
+            Debug.Log("Shop");
+            var popup = UI_Manager.Instance.ShowPopupUI<UI_ShopPopup>();
+            var rect = popup.transform.GetChild(0).GetComponent<RectTransform>();
+            rect.anchoredPosition = new Vector2(-2000, 0);
+            rect.DOKill();
+            rect.DOAnchorPosX(0, 1.5f).OnComplete(() => { m_DoAnim = false; });
+        }
     }
 
 

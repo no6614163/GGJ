@@ -16,8 +16,13 @@ public enum SceneType
 {
     Start,
     Lobby,
-    Game_Card,
     Game_Pong,
+    Game_CatchMole,
+    Game_Card,
+    Game_Yabawee,
+    Gmae_SlidingPuzzle,
+    Game_JumpJump,
+    
 }
 
 public enum ItemType

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -42,7 +43,11 @@ public class UI_Start : UI_Scene
     void OnButtonClickedSettings(PointerEventData evt)
     {
         Debug.Log("Settings");
-        UI_Manager.Instance.ShowPopupUI<UI_SettingsPopup>();
+        //UI_Manager.Instance.ShowPopupUI<UI_SettingsPopup>();
+        var popup = UI_Manager.Instance.ShowPopupUI<UI_SettingsPopup>();
+        var rect = popup.transform.GetChild(0).GetComponent<RectTransform>();
+        rect.localScale = Vector3.zero;
+        rect.DOScale(1, 0.5f);
 
     }
 
