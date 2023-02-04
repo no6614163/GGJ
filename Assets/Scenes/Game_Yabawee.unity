@@ -891,11 +891,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 425c452263150614cb7eb5cf7e0bde1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RoundCount: 3
   CupCount: 4
   ShufflePerRound: 030000000400000006000000
-  ShuffleDuration: 1
-  ShuffleInterval: 1
-  MinItemMoveCount: 2
+  MinItemMoveCount: 020000000300000004000000
+  FalseShuffleRangePerRound:
+  - {x: 1, y: 1}
+  - {x: 1, y: 2}
+  - {x: 1, y: 3}
+  ShuffleDuration: 0.7
+  ShuffleInterval: 0.5
+  RoundInterval: 1
   YMovement: 50
   CupSpacing: 170
 --- !u!4 &1634569757

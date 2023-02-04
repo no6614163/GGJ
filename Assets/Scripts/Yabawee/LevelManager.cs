@@ -10,12 +10,16 @@ namespace Yabawee
         float cupYPos;
         float itemYPos;
 
+        bool isWrong;
+
+        int itemShuffledCount = 0;
         CupBehaviour chosenCup = null;
+        bool [] doFalseShuffle;
 
         Vector2[] handOriginalPos = new Vector2[2];
         Vector2[] cupOriginalPos;
 
-        CupBehaviour[] cups;
+         CupBehaviour[] cups;
         [SerializeField] Hand [] hands;
         [SerializeField] RectTransform referenceCup;
         [SerializeField] RectTransform showStage;
@@ -64,29 +68,66 @@ namespace Yabawee
         }
         private void Start()
         {
-            StartCoroutine(RoundCoroutine(0));
+            StartCoroutine(GameCoroutine());
+        }
+        IEnumerator GameCoroutine()
+        {
+            for (int i = 0; i < config.RoundCount; i++)
+            {
+                yield return StartCoroutine(RoundCoroutine(i));
+                chosenCup = null;
+                if(isWrong)
+                {
+                    //TODO : 게임 오버
+                    yield break;
+                }
+                yield return new WaitForSeconds(config.RoundInterval);
+            }
+            //게임 클리어
         }
         IEnumerator RoundCoroutine(int round)
         {
             float handMoveDuration = 1f;
             float[] dur = new float[] { 0.3f, 0.4f, 0.3f };
             foreach (var cup in cups)
-                cup.Clickable = false;
-            for(int i=0; i<config.CupCount; i+=2)
+                cup.Clickable = false; 
+            itemShuffledCount = 0;
+            doFalseShuffle = new bool[config.ShufflePerRound[round]];
+            int falseShuffleCount = Random.Range(config.FalseShuffleRangePerRound[round].x, config.FalseShuffleRangePerRound[round].y + 1);
+            for(int i=0; i<doFalseShuffle.Length; i++)
             {
-                ArrangeHands();
+                if (i < falseShuffleCount)
+                    doFalseShuffle[i] = true;
+                else
+                    doFalseShuffle[i] = false;
+            }
+            HappyUtils.Random.Shuffle(doFalseShuffle);
+            ArrangeCups();
+            ArrangeHands();
+            for (int i=0; i<config.CupCount; i+=2)
+            {
                 //컵쪽으로 손 감
-                StartCoroutine(GrabCup(hands[0], i, handMoveDuration * dur[0]));
-                if (i+1 < config.CupCount)
-                    StartCoroutine(GrabCup(hands[1], i+1, handMoveDuration * dur[0]));
-                yield return new WaitForSeconds(handMoveDuration * dur[0]);
-                //컵 앞으로 놓음
-                StartCoroutine(CupToFront(i, handMoveDuration * dur[1], handMoveDuration * dur[2]));
                 if (i + 1 < config.CupCount)
-                    StartCoroutine(CupToFront(i+1, handMoveDuration * dur[1], handMoveDuration * dur[2]));
-                yield return new WaitForSeconds(handMoveDuration * (dur[1] + dur[2]));
-                hands[0].transform.SetAsLastSibling();
+                {
+                    StartCoroutine(GrabCup(hands[0], i, handMoveDuration * dur[0]));
+                    yield return StartCoroutine(GrabCup(hands[1], i + 1, handMoveDuration * dur[0]));
+                }
+                else
+                {
+                    yield return StartCoroutine(GrabCup(hands[1], i, handMoveDuration * dur[0]));
+                }
+                //컵 앞으로 놓음
+                if (i + 1 < config.CupCount)
+                {
+                    StartCoroutine(CupToFront(i, handMoveDuration * dur[1], handMoveDuration * dur[2]));
+                    yield return StartCoroutine(CupToFront(i + 1, handMoveDuration * dur[1], handMoveDuration * dur[2]));
+                }
+                else
+                {
+                    yield return StartCoroutine(CupToFront(i, handMoveDuration * dur[1], handMoveDuration * dur[2]));
+                }
                 hands[1].transform.SetAsLastSibling();
+                hands[0].transform.SetAsLastSibling();
             }
 
             item.gameObject.SetActive(false);
@@ -96,13 +137,16 @@ namespace Yabawee
                 indicies[i] = i;
             for (int i=0; i<config.ShufflePerRound[round]; i++)
             {
-                ArrangeHands();
                 int[] shuffleTargets = HappyUtils.Random.RandomElements(indicies, 2);
-                if (currentItemIndex == shuffleTargets[0])
-                    currentItemIndex = shuffleTargets[1];
-                else if (currentItemIndex == shuffleTargets[1])
-                    currentItemIndex = shuffleTargets[0];
-                yield return StartCoroutine(Shuffle(new int[]{ shuffleTargets[0], shuffleTargets[1]}));
+                if (config.ShufflePerRound[round] - 1 - i < config.MinItemMoveCount[round] - itemShuffledCount)
+                {
+                    shuffleTargets[0] = currentItemIndex;
+                    shuffleTargets[1] = Random.Range(0, cups.Length);
+                }
+                if (shuffleTargets[0] == itemShuffledCount || shuffleTargets[1] == itemShuffledCount)
+                    itemShuffledCount++;
+                yield return StartCoroutine(Shuffle(new int[]{ shuffleTargets[0], shuffleTargets[1]}, doFalseShuffle[i]));
+                ArrangeHands();
                 if (i < config.ShufflePerRound[round] - 1)
                     yield return new WaitForSeconds(config.ShuffleInterval);
             }
@@ -127,29 +171,43 @@ namespace Yabawee
             yield return new WaitForSeconds(0.5f);
             int hand = GetCloseHandIndex(chosenCup);
             item.gameObject.SetActive(true);
+            item.RectTransform.anchoredPosition = new Vector2(cups[currentItemIndex].RectTransform.anchoredPosition.x, itemYPos);
             yield return StartCoroutine(GrabCup(hands[hand], chosenCup.ID, handMoveDuration * dur[0]));
             yield return StartCoroutine(CupToBack(chosenCup.ID, handMoveDuration * dur[1], handMoveDuration * dur[2]));
-
             yield return new WaitForSeconds(1f);
+
             List<int> leftCups = new List<int>();
             for(int i=0; i<config.CupCount; i++)
             {
                 if (i == chosenCup.ID) continue;
                 leftCups.Add(i);
             }
+            leftCups.Sort((x, y) => (int)(cups[x].RectTransform.anchoredPosition.x - cups[y].RectTransform.anchoredPosition.x));
+
+            ArrangeHands();
             for (int i = 0; i < leftCups.Count; i += 2)
             {
-                ArrangeHands();
                 //컵쪽으로 손 감
-                StartCoroutine(GrabCup(hands[0], leftCups[i], handMoveDuration * dur[0]));
+
                 if (i + 1 < leftCups.Count)
-                    StartCoroutine(GrabCup(hands[1], leftCups[i + 1], handMoveDuration * dur[0]));
-                yield return new WaitForSeconds(handMoveDuration * dur[0]);
+                {
+                    StartCoroutine(GrabCup(hands[0], leftCups[i], handMoveDuration * dur[0]));
+                    yield return StartCoroutine(GrabCup(hands[1], leftCups[i + 1], handMoveDuration * dur[0]));
+                }
+                else
+                {
+                    yield return StartCoroutine(GrabCup(hands[1], leftCups[i], handMoveDuration * dur[0]));
+                }
                 //컵 앞으로 놓음
-                StartCoroutine(CupToBack(leftCups[i], handMoveDuration * dur[1], handMoveDuration * dur[2]));
                 if (i + 1 < leftCups.Count)
-                    StartCoroutine(CupToBack(leftCups[i + 1], handMoveDuration * dur[1], handMoveDuration * dur[2]));
-                yield return new WaitForSeconds(handMoveDuration * (1 - dur[0]));
+                {
+                    StartCoroutine(CupToBack(leftCups[i], handMoveDuration * dur[1], handMoveDuration * dur[2]));
+                    yield return StartCoroutine(CupToBack(leftCups[i + 1], handMoveDuration * dur[1], handMoveDuration * dur[2]));
+                }
+                else
+                {
+                    yield return StartCoroutine(CupToBack(leftCups[i], handMoveDuration * dur[1], handMoveDuration * dur[2]));
+                }
             }
             yield return StartCoroutine(ReturnHands());
         }
@@ -161,11 +219,27 @@ namespace Yabawee
                 var t = hands[0];
                 hands[0] = hands[1];
                 hands[1] = t;
+
+                var t2 = handOriginalPos[0];
+                handOriginalPos[0] = handOriginalPos[1];
+                handOriginalPos[1] = t2;
+            }
+        }
+        void ArrangeCups()
+        {
+            List<CupBehaviour> sortedCups = new List<CupBehaviour>();
+            sortedCups.AddRange(cups);
+            sortedCups.Sort((x, y) => (int)(x.RectTransform.anchoredPosition.x - y.RectTransform.anchoredPosition.x));
+
+            currentItemIndex = sortedCups.FindIndex(x => x.ID == currentItemIndex);
+            for (int i = 0; i < sortedCups.Count; i++)
+            {
+                cups[i] = sortedCups[i];
+                cups[i].Init(this, i);
             }
         }
         IEnumerator ReturnHands(float duration = 1f)
         {
-            ArrangeHands();
             StartCoroutine(MoveHand(hands[0], handOriginalPos[0], duration));
             yield return StartCoroutine(MoveHand(hands[1], handOriginalPos[1], duration));
         }
@@ -176,6 +250,7 @@ namespace Yabawee
         void OnWrong()
         {
             Debug.Log("OnWrong!");
+            isWrong = true;
         }
         IEnumerator CupToFront(int cupIndex, float duration1, float duration2)
         {
@@ -196,11 +271,16 @@ namespace Yabawee
             cups[cupIndex].SetGrabbed(hand);
         }
 
-        IEnumerator Shuffle(int [] cupIndicies)
+        IEnumerator Shuffle(int [] cupIndicies, bool falseShuffle)
         {
             float handMoveDuration = 0.2f;
-
-            int handIdx = GetCloseHandIndex(cups[cupIndicies[0]]);
+            if(cupIndicies[0] > cupIndicies[1])
+            {
+                int tem = cupIndicies[0];
+                cupIndicies[0] = cupIndicies[1];
+                cupIndicies[1] = tem;
+            }    
+            int handIdx = 0;
             StartCoroutine(GrabCup(hands[handIdx], cupIndicies[0], handMoveDuration));
             StartCoroutine(GrabCup(hands[1-handIdx], cupIndicies[1], handMoveDuration));
             yield return new WaitForSeconds(handMoveDuration);
@@ -217,8 +297,16 @@ namespace Yabawee
             StartCoroutine(MoveCup(cupIndicies[1], center - new Vector2(0, config.YMovement), config.ShuffleDuration/2));
             yield return new WaitForSeconds(config.ShuffleDuration * 0.5f);
 
-            StartCoroutine(MoveCup(cupIndicies[0], cup1pos, config.ShuffleDuration/2));
-            StartCoroutine(MoveCup(cupIndicies[1], cup0pos, config.ShuffleDuration/2));
+            if (falseShuffle)
+            {
+                StartCoroutine(MoveCup(cupIndicies[0], cup0pos, config.ShuffleDuration / 2));
+                StartCoroutine(MoveCup(cupIndicies[1], cup1pos, config.ShuffleDuration / 2));
+            }
+            else
+            {
+                StartCoroutine(MoveCup(cupIndicies[0], cup1pos, config.ShuffleDuration / 2));
+                StartCoroutine(MoveCup(cupIndicies[1], cup0pos, config.ShuffleDuration / 2));
+            }
             yield return new WaitForSeconds(config.ShuffleDuration * 0.5f);
 
             cups[cupIndicies[0]].SetRelease();

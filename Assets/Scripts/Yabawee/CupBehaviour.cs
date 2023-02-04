@@ -26,17 +26,20 @@ namespace Yabawee
         private void Update()
         {
             if (hand != null)
+            {
+
+                hand.transform.SetSiblingIndex(transform.GetSiblingIndex() + 1);
                 hand.RectTransform.anchoredPosition = HandPosition;
+            }
         }
         public void SetGrabbed(Hand hand)
         {
             this.hand = hand;
-            hand.transform.SetSiblingIndex(transform.GetSiblingIndex() + 1);
         }
         public Hand SetRelease()
         {
             Hand hand = this.hand;
-            hand.transform.SetSiblingIndex(transform.GetSiblingIndex() + 1);
+            hand.transform.SetAsLastSibling();
             this.hand = null;
             return hand;
         }
