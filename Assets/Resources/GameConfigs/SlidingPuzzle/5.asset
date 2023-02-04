@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 5
   m_EditorClassIdentifier: 
   TimeScale: 1
-  TimeLimit: 65
+  TimeLimit: 60
   ShuffleCount: 101
   BoardSize: 4

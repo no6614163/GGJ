@@ -410,6 +410,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: chickencup
+      rect:
+        serializedVersion: 2
+        x: 861
+        y: 45
+        width: 166
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4420405056f161448e28623c57a2f5e
+      internalID: -1428383158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -434,6 +455,7 @@ TextureImporter:
       Cow: -1084347665
       AllCharacters_12: -1680627640
       Sheep: -1848844473
+      chickencup: -1428383158
       AllCharacters_9: 384410103
       Chick: -774978281
   spritePackingTag: 
