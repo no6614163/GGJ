@@ -10,6 +10,8 @@ public class StartScene : MonoBehaviour
     {
         // NOTE : юс╫ц
         UI_Start = UI_Manager.Instance.ShowSceneUI<UI_Start>();
+        Instantiate(Resources.Load<SoundManager>("Prefabs/SoundManager"));
+        
     }
 
 
