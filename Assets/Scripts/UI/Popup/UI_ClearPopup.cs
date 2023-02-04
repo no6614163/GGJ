@@ -55,7 +55,7 @@ public class UI_ClearPopup : UI_Popup
         // TODO : 다음 스테이지 입력 해주는게 맞음. 스테이지 자체는 랜덤으로
         // 씬 호출 전에 gamesystem에서 현재 스테이지 바꿔주기
         GameSystem.Instance.SetNextStage();
-        int rand = Random.Range(2, 4);
+        int rand = Random.Range(2, 8);
         GameSystem.Instance.LoadScene(rand);
     }
 

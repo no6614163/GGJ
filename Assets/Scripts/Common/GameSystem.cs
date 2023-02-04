@@ -46,9 +46,6 @@ public class GameSystem : Singleton<GameSystem>
     {
         CurrentStage = 1;
         ScoreArray = new int[Constants.MaxStageCount];
-
-
-
     }
     public void SetGold(int gold)
     {

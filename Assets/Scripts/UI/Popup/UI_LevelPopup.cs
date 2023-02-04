@@ -82,8 +82,6 @@ public class UI_LevelPopup : UI_Popup
             int rand = Random.Range(2, 8);
             GameSystem.Instance.LoadScene(rand);
         }
-        //GameSystem.Instance.level
-        
     }
 
     void OnButtonClickedVeryEasy(PointerEventData evt)

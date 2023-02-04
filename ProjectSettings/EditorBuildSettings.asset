@@ -12,9 +12,21 @@ EditorBuildSettings:
     path: Assets/Scenes/LobbyScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
+    path: Assets/Scenes/Pong.unity
+    guid: 4bf4436710322ee42b9fbf551ebc36dc
+  - enabled: 1
+    path: Assets/Scenes/Catch_Mole.unity
+    guid: 37f02faeff49acc46b485c9b940a5c0e
+  - enabled: 1
     path: Assets/Scenes/Game_CardMatch.unity
     guid: 8334a2a36bb63ab4c9d0a1755d0713f7
   - enabled: 1
-    path: Assets/Scenes/Pong.unity
-    guid: 4bf4436710322ee42b9fbf551ebc36dc
+    path: Assets/Scenes/Game_Yabawee.unity
+    guid: 5e15c41d05ca4b84a90254d3f3cdffbd
+  - enabled: 1
+    path: Assets/Scenes/Game_SlidingPuzzle.unity
+    guid: 30348894d923e084b990baadb479aabf
+  - enabled: 1
+    path: Assets/Scenes/Game_JumpJump.unity
+    guid: 4fa0d330cc45aaa43a39fd7a3927ebec
   m_configObjects: {}
