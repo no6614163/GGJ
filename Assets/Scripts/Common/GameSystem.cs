@@ -13,10 +13,18 @@ public class GameSystem : Singleton<GameSystem>
     public int CurrentStage { get; private set; }
     public int[] ScoreArray { get; private set; }
 
+
+    public List<ShopItem> ShopItems;
+
+
     void Awake()
     {
         CurrentStage = 1;
         ScoreArray = new int[Constants.MaxStageCount];
+        // NOTE : csv 파일에서 테이블 불러와서 저장
+        SpecLoader<ShopItem> specLoader = new SpecLoader<ShopItem>("Data/ItemData");
+        ShopItems = specLoader.GetAllSpecList();
+        DontDestroyOnLoad(this);
     }
 
     public void InitGameSystem()

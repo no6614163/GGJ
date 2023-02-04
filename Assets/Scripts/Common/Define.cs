@@ -23,6 +23,6 @@ public enum SceneType
 public enum ItemType
 {
     Food,
-    Happy,
-    Spawn,
+    Deco,
+    Animal,
 }
