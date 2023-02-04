@@ -22,10 +22,13 @@ public class GameState : MonoBehaviour
             m_End = true;
             time = 0f;
             // TODO : 현재 스테이지 확인 후 마지막 스테이지인 경우 succeess 호출 해줘야됨.
-            UI_Manager.Instance.ShowPopupUI<UI_ClearPopup>();
+            if(GameSystem.Instance.CurrentStage==Constants.MaxStageCount)
+                UI_Manager.Instance.ShowPopupUI<UI_SuccessPopup>();
+            else
+                UI_Manager.Instance.ShowPopupUI<UI_ClearPopup>();
             SoundManager.Instance.PlaySFXPitched("clear", "pong", 0.02f);
             Time.timeScale = 0;
-            // UI_Manager.Instance.ShowPopupUI<UI_SuccessPopup>();
+            
         }
 
     }
