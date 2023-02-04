@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf7c34a0dc4e6348bea04faa70406ee, type: 3}
+  m_Name: Chicken white Sprite Library Asset
+  m_EditorClassIdentifier: 
+  m_Labels:
+  - m_Name: All
+    m_Hash: 55916349
+    m_CategoryList:
+    - m_Name: Reflect
+      m_Hash: 1094318037
+      m_Sprite: {fileID: 21300000, guid: d587c0dd25cc0418d8aad459aeb1fbd3, type: 3}
+    - m_Name: Beak
+      m_Hash: -121396137
+      m_Sprite: {fileID: 21300000, guid: 8e540617d066b406f873d0894a48b606, type: 3}
+    - m_Name: Body
+      m_Hash: 2073732236
+      m_Sprite: {fileID: 21300000, guid: 54c9a01bf008a4c2c80a74e4ab5e08af, type: 3}
+    - m_Name: Comb
+      m_Hash: -1736330932
+      m_Sprite: {fileID: 21300000, guid: 38acc98648900447dba4952838097ac5, type: 3}
+    - m_Name: Eyes
+      m_Hash: 120101800
+      m_Sprite: {fileID: 21300000, guid: 3d420cb15113f4fa0b7a5b4d562f06b2, type: 3}
+    - m_Name: Head
+      m_Hash: 130111906
+      m_Sprite: {fileID: 21300000, guid: bf296934c2b49496faa9a8c4c094645f, type: 3}
+    - m_Name: Leg1
+      m_Hash: -973550584
+      m_Sprite: {fileID: 21300000, guid: 818a5c4b38b9a4496be149f405c5cebe, type: 3}
+    - m_Name: Leg2
+      m_Hash: 1559338418
+      m_Sprite: {fileID: 21300000, guid: 1167144737d344d518b5085a453bd1c4, type: 3}
+    - m_Name: Leg3
+      m_Hash: 737586468
+      m_Sprite: {fileID: 21300000, guid: b972fe0aa8da44a789b1c7de6711c1be, type: 3}
+    - m_Name: Leg4
+      m_Hash: -1248708473
+      m_Sprite: {fileID: 21300000, guid: 10183b7996d5e43e899ad014f5bff24b, type: 3}
+    - m_Name: Tail
+      m_Hash: -603645085
+      m_Sprite: {fileID: 21300000, guid: 2e148f5f1b249442daebc2e13b2024b9, type: 3}
+    - m_Name: Wattle
+      m_Hash: 1194230058
+      m_Sprite: {fileID: 21300000, guid: 4147516c38dd8482e9f24b1a1e9c9534, type: 3}
+    - m_Name: Wing1
+      m_Hash: 856966975
+      m_Sprite: {fileID: 21300000, guid: 99396cff5790040ceab5f474b4b9ab92, type: 3}
+    - m_Name: Wing2
+      m_Hash: -1440934267
+      m_Sprite: {fileID: 21300000, guid: 9b67fc764000a4a718b524b4eddc85ee, type: 3}
