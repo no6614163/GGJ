@@ -42,7 +42,10 @@ public class UI_Game : UI_Scene
         Bind<TMP_Text>(typeof(Texts));
         Bind<Image>(typeof(Images));
         Bind<Slider>(typeof(Sliders));
-        
+
+        Get<Slider>((int)Sliders.Slider_Happy).maxValue = 100;
+        Get<Slider>((int)Sliders.Slider_Food).maxValue = 100;
+
         SetInit();
         
         Get<Image>((int)Images.Image_Setting).gameObject.BindEvent(OnButtonClickedSetting);

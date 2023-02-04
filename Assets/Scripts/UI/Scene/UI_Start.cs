@@ -54,8 +54,10 @@ public class UI_Start : UI_Scene
     void OnButtonClickedCredits(PointerEventData evt)
     {
         Debug.Log("Credits");
-        UI_Manager.Instance.ShowPopupUI<UI_CreditsPopup>();
-
+        var popup = UI_Manager.Instance.ShowPopupUI<UI_CreditsPopup>();
+        var rect = popup.transform.GetChild(0).GetComponent<RectTransform>();
+        rect.localScale = Vector3.zero;
+        rect.DOScale(1, 0.5f);
     }
 
     void OnButtonClickedQuit(PointerEventData evt)

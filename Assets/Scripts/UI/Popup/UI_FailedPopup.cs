@@ -19,12 +19,6 @@ public class UI_FailedPopup : UI_Popup
         Text_Stage3,
         Text_Stage4,
         Text_Stage5,
-        Text_StageClear1,
-        Text_StageClear2,
-        Text_StageClear3,
-        Text_StageClear4,
-        Text_StageClear5,
-
     }
 
     enum Images
@@ -45,14 +39,25 @@ public class UI_FailedPopup : UI_Popup
     void PlayAnimation()
     {
         // TODO : 애니메이션 실행
+        Sequence seq = DOTween.Sequence();
         int currentStage = GameSystem.Instance.CurrentStage;
         for (int i = 0; i < 5; i++)
         {
-            if(i+1 > currentStage)
-                Get<TMP_Text>((int)Texts.Text_Stage + (i+1)).text = string.Format("Stage {0} : Clear", (i+1));
+            if (i + 1 < currentStage)
+            {
+                //Get<TMP_Text>((int)Texts.Text_Stage + (i + 1)).text = string.Format("Stage {0} : Clear", (i + 1));
+                seq.Append(Get<TMP_Text>((int)Texts.Text_Stage + (i + 1)).DOText(string.Format("Stage {0} : Clear", (i + 1)), 1));
+            }
+            else if(i + 1 == currentStage)
+            {
+                seq.Append(Get<TMP_Text>((int)Texts.Text_Stage + (i + 1)).DOText(string.Format("Stage {0} : Failed", (i + 1)), 1));
+            }
             else
-                Get<TMP_Text>((int)Texts.Text_Stage + (i + 1)).text = string.Format("Stage {0} : Failed", (i + 1));
+            {
+                Get<TMP_Text>((int)Texts.Text_Stage + (i + 1)).text = "";
+            }
         }
+        seq.Play();
     }
 
     void OnButtonClickedOut(PointerEventData evt)
