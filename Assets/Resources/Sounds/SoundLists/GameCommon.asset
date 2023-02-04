@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3283c5a7233ffd4b9416e9cc7bac3f8, type: 3}
+  m_Name: GameCommon
+  m_EditorClassIdentifier: 
+  _listTitle: GameCommon
+  _sounds:
+  - _name: Hover
+    _clip: {fileID: 8300000, guid: d77141bd174394c4092421f88654a2fe, type: 3}
+    _volume: 0.5
+  - _name: Click
+    _clip: {fileID: 8300000, guid: 6392820df352197438e486086037e9da, type: 3}
+    _volume: 0.5
+  - _name: Correct
+    _clip: {fileID: 8300000, guid: b49002a66e090469eaf946684e9ef9f0, type: 3}
+    _volume: 0.5
+  - _name: Correct
+    _clip: {fileID: 8300000, guid: d1ca39bea9add498fa1488bcd03219ce, type: 3}
+    _volume: 0.5
+  - _name: Wrong
+    _clip: {fileID: 8300000, guid: 8ccaee31df5254a3f9c60a7990940d66, type: 3}
+    _volume: 0.5

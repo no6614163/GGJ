@@ -13,6 +13,8 @@ public class UI_Lobby : UI_Scene
         Text_Start,
         Text_Time,
         Text_Gold,
+        Text_HappyPoint,
+        Text_FoodPoint,
 
     }
 
@@ -57,6 +59,10 @@ public class UI_Lobby : UI_Scene
         // TODO : init 할 때 푸드포인트 혹은 해피포인트가 위험하면 팝업 띄우는게 나을듯.
         Get<TMP_Text>((int)Texts.Text_Time).text = string.Format("Day {0}", GameSystem.Instance.Day);
         Get<TMP_Text>((int)Texts.Text_Gold).text = GameSystem.Instance.Gold.ToString();
+
+        Get<TMP_Text>((int)Texts.Text_HappyPoint).text = string.Format("{0} / {1}", GameSystem.Instance.HappyPoint, 100);
+        Get<TMP_Text>((int)Texts.Text_FoodPoint).text = string.Format("{0} / {1}", GameSystem.Instance.FoodPoint, 100);
+
         Get<Slider>((int)Sliders.Slider_Happy).value = GameSystem.Instance.HappyPoint;
         Get<Slider>((int)Sliders.Slider_Food).value = GameSystem.Instance.FoodPoint;
     }

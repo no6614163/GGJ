@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimeScale: 1
   TimeLimit: 20
-  ColCount: 4
+  ColCount: 2
   InitialShowingTime: 1

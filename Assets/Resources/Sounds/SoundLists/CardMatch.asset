@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3283c5a7233ffd4b9416e9cc7bac3f8, type: 3}
-  m_Name: CardMatchSounds
+  m_Name: CardMatch
   m_EditorClassIdentifier: 
   _listTitle: CardMatch
   _sounds:

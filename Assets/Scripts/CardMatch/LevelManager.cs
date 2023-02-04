@@ -9,8 +9,10 @@ namespace CardMatch
     {
         GameConfig config;
         public GameConfig Config { get { return config; } }
+        [SerializeField] RectTransform canvas;
         [SerializeField] RectTransform cardParent;
         [SerializeField] CardBehaviour cardPrefab;
+        [SerializeField] UIBurstParticle particlePrefab;
 
         List<CardBehaviour> cards = new List<CardBehaviour>();
 
@@ -19,6 +21,11 @@ namespace CardMatch
         int wrongCount = 0;
         int matchedCards = 0;
 
+        public void InstantiateParticle(Vector2 pos)
+        {
+            var particle = Instantiate(particlePrefab, canvas.transform);
+            particle.RectTransform.position = pos;
+        }
 
         protected override void Awake()
         {
@@ -93,15 +100,23 @@ namespace CardMatch
         void OnWrong(CardBehaviour card1, CardBehaviour card2)
         {
             //TODO : 삐빅효과
+            SoundManager.Instance.PlaySFXPitched("Wrong", "GameCommon", 0.05f, 1.2f);
             card1.SetDesiredState(false);
             card2.SetDesiredState(false);
+            card1.OnWrong();
+            card2.OnWrong();
             wrongCount += 1;
         }
         void OnCorrect(CardBehaviour card1, CardBehaviour card2)
         {
             //TODO : 정답 효과, 점수추가
+            SoundManager.Instance.PlaySFXToggle("Correct", "GameCommon");
+            InstantiateParticle(card1.RectTransform.position);
+            InstantiateParticle(card2.RectTransform.position);
             card1.Clickable = false;
             card2.Clickable = false;
+            card1.OnCorrect();
+            card2.OnCorrect();
             matchedCards += 2;
             if(matchedCards == cards.Count)
             {
@@ -110,14 +125,33 @@ namespace CardMatch
         }
         public override void OnTimerEnd()
         {
-            Debug.Log("제한시간 초과로 패배!");
-            UI_Manager.Instance.ShowPopupUI<UI_FailedPopup>();
+            StartCoroutine(EndCoroutine(false));
         }
         void OnGameClear()
         {
             StopTimer();
-            Debug.Log("게임 클리어!");
-            UI_Manager.Instance.ShowPopupUI<UI_ClearPopup>();
+
+            StartCoroutine(EndCoroutine(true));
+        }
+        IEnumerator EndCoroutine(bool isWin)
+        {
+            //틀린 직후
+            for (int i = 0; i < cards.Count; i++)
+                cards[i].Clickable = false;
+            yield return new WaitForSeconds(0.5f);
+            for (int i = 0; i < cards.Count; i++)
+            {
+                if (isWin)
+                    cards[i].OnCorrect();
+                else
+                    cards[i].OnWrong();
+            }
+
+            yield return new WaitForSeconds(1f);
+            if (isWin)
+                UI_Manager.Instance.ShowPopupUI<UI_ClearPopup>();
+            else
+                UI_Manager.Instance.ShowPopupUI<UI_FailedPopup>();
         }
     }
 }
