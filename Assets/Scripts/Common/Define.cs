@@ -29,13 +29,14 @@ public enum ItemType
 
 public enum AnimalType
 {
+    Goat,
+    Chicken,
     Sheep,
-    Sheep1,
-    Sheep2,
-    Sheep3,
-    Sheep4,
-    Sheep5,
-    Sheep6,
-    Sheep7,
-    Sheep8,
+    Lambkin,
+    Pig,
+    Cow,
+    Duck,
+    TabbyPig,
+    Chick,
+    Alpaca,
 }

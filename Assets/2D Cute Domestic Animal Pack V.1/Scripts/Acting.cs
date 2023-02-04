@@ -1,10 +1,11 @@
 ﻿public enum Acting
 {
-    Eat,
-    Eat2,
     Idle,
     Jump,
-    Sleep,
     Walk,
+    Sleep,
+    Eat,
+    Eat2,
+    
     Idle2,
 }

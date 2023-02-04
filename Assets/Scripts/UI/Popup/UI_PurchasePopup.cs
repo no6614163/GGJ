@@ -71,6 +71,9 @@ public class UI_PurchasePopup : UI_Popup
                     }
                     break;
             }
+
+            EventManager.Instance.GameEvent.InvokePurchaseItem();
+            UI_Manager.Instance.ClosePopupUI();
         }
         else
         {

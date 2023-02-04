@@ -3,6 +3,17 @@ using UnityEngine;
 
 public class AnimalAnimation : CharacterAnimation
 {
+    public Acting CurrentAct;
+    void Awake()
+    {
+        CurrentAct = Acting.Jump;
+    }
+
+    public void SetAnim(Acting act)
+    {
+        SetAnimation(act);
+        CurrentAct = act;
+    }
 
     protected override void SetAnimation(Acting acting)
     {

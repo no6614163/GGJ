@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEditor;
@@ -15,6 +16,10 @@ public class UI_ShopPopup : UI_Popup
         Text_Settings,
         Text_Controls,
         Text_Languages,
+        Text_Time,
+        Text_Gold,
+        Text_HappyPoint,
+        Text_FoodPoint,
     }
 
     enum Images
@@ -26,6 +31,12 @@ public class UI_ShopPopup : UI_Popup
         Image_DecoOutline,
         Image_Animals,
         Image_AnimalsOutline,
+    }
+
+    enum Sliders
+    {
+        Slider_Happy,
+        Slider_Food,
     }
 
     [SerializeField]
@@ -40,15 +51,39 @@ public class UI_ShopPopup : UI_Popup
         m_ShopItems = new List<UI_ShopItem>();
         Bind<TMP_Text>(typeof(Texts));
         Bind<Image>(typeof(Images));
+        EventManager.Instance.GameEvent.OnPurchaseRequest += GameEvent_OnPurchaseRequest;
+
+        Bind<Slider>(typeof(Sliders));
 
         Get<Image>((int)Images.Image_Back).gameObject.BindEvent(OnButtonClickedBack);
         Get<Image>((int)Images.Image_Food).gameObject.BindEvent(OnButtonClickedFood);
         Get<Image>((int)Images.Image_Deco).gameObject.BindEvent(OnButtonClickedDeco);
         SetOffAllOutline();
-
+        SetInit();
         Get<Image>((int)Images.Image_Animals).gameObject.BindEvent(OnButtonClickedAnimals);
         SetFoodItems();
         Get<Image>((int)Images.Image_FoodOutline).gameObject.SetActive(true);
+    }
+    void GameEvent_OnPurchaseRequest()
+    {
+        Get<TMP_Text>((int)Texts.Text_Gold).text = GameSystem.Instance.Gold.ToString();
+        Get<TMP_Text>((int)Texts.Text_HappyPoint).text = string.Format("{0} / {1}", GameSystem.Instance.HappyPoint, 100);
+        Get<TMP_Text>((int)Texts.Text_FoodPoint).text = string.Format("{0} / {1}", GameSystem.Instance.FoodPoint, 100);
+
+        Get<Slider>((int)Sliders.Slider_Happy).value = GameSystem.Instance.HappyPoint;
+        Get<Slider>((int)Sliders.Slider_Food).value = GameSystem.Instance.FoodPoint;
+    }
+
+    void SetInit()
+    {
+        // TODO : init 할 때 푸드포인트 혹은 해피포인트가 위험하면 팝업 띄우는게 나을듯.
+        Get<TMP_Text>((int)Texts.Text_Gold).text = GameSystem.Instance.Gold.ToString();
+
+        Get<TMP_Text>((int)Texts.Text_HappyPoint).text = string.Format("{0} / {1}", GameSystem.Instance.HappyPoint, 100);
+        Get<TMP_Text>((int)Texts.Text_FoodPoint).text = string.Format("{0} / {1}", GameSystem.Instance.FoodPoint, 100);
+
+        Get<Slider>((int)Sliders.Slider_Happy).value = GameSystem.Instance.HappyPoint;
+        Get<Slider>((int)Sliders.Slider_Food).value = GameSystem.Instance.FoodPoint;
     }
 
     void SetOffAllOutline()
@@ -94,7 +129,8 @@ public class UI_ShopPopup : UI_Popup
         for (int i = 0; i < foods.Count; i++)
         {
             var shopItem = Instantiate(Resources.Load<UI_ShopItem>("Prefabs/UI/Popup/ShopItem"), m_ShopItemParent);
-            shopItem.SetData(foods[i]);
+            Sprite sprite = Resources.Load<Sprite>("Images/ShopItemImages/" + foods[i].ItemName);
+            shopItem.SetData(foods[i], sprite);
             m_ShopItems.Add(shopItem);
         }
     }
@@ -105,6 +141,7 @@ public class UI_ShopPopup : UI_Popup
         for (int i = 0; i < decos.Count; i++)
         {
             var shopItem = Instantiate(Resources.Load<UI_ShopItem>("Prefabs/UI/Popup/ShopItem"), m_ShopItemParent);
+            
             shopItem.SetData(decos[i]);
             m_ShopItems.Add(shopItem);
         }
@@ -113,10 +150,15 @@ public class UI_ShopPopup : UI_Popup
     void SetAnimalItems()
     {
         List<ShopItem> animals = GameSystem.Instance.ShopItems.FindAll((x) => x.ItemType == ItemType.Animal);
+
+        // Load all sprites in atlas
+        Sprite[] Sprites = Resources.LoadAll<Sprite>("Images/ShopItemImages/AllCharacters");
         for (int i = 0; i < animals.Count; i++)
         {
             var shopItem = Instantiate(Resources.Load<UI_ShopItem>("Prefabs/UI/Popup/ShopItem"), m_ShopItemParent);
-            shopItem.SetData(animals[i]);
+            // Get specific sprite
+            Sprite sprite = Sprites.Single(s => s.name == animals[i].ItemName);
+            shopItem.SetData(animals[i], sprite);
             m_ShopItems.Add(shopItem);
         }
     }
