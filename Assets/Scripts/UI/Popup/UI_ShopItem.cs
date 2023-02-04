@@ -27,15 +27,9 @@ public class UI_ShopItem : UI_Popup
 
     public override void Init()
     {
-        //base.Init();
-        //var canvas = GetComponent<Canvas>();
-        //canvas.overrideSorting = false;
         Bind<TMP_Text>(typeof(Texts));
         Bind<Image>(typeof(Images));
         m_Init = true;
-
-        //Get<Image>((int)Images.Image_Item).sprite = 
-        //PlayAnimation();
     }
 
     public void SetData(ShopItem data)
@@ -51,17 +45,10 @@ public class UI_ShopItem : UI_Popup
 
         Get<Image>((int)Images.Image_Background).gameObject.BindEvent(OnButtonClickedItem);
     }
-    void PlayAnimation()
-    {
-        // TODO : 애니메이션 실행
-        int stage = GameSystem.Instance.CurrentStage;
-
-    }
 
     void OnButtonClickedItem(PointerEventData evt)
     {
         Debug.Log("Item");
-        
 
 
 
