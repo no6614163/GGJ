@@ -17,7 +17,7 @@ public class UI_Game : UI_Scene
     {
         Image_Time,
         Image_Gold,
-        Image_Setting,
+        Image_Settings,
         Image_Shop,
         Image_Back,
     }
@@ -34,8 +34,7 @@ public class UI_Game : UI_Scene
         Bind<Image>(typeof(Images));
         Bind<Slider>(typeof(Sliders));
 
-        Get<Image>((int)Images.Image_Setting).gameObject.BindEvent(OnButtonClickedSettings);
-        Get<Image>((int)Images.Image_Shop).gameObject.BindEvent(OnButtonClickedSettings);
+        Get<Image>((int)Images.Image_Settings).gameObject.BindEvent(OnButtonClickedSettings);
 
     }
 
