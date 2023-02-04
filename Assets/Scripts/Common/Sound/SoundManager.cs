@@ -7,6 +7,7 @@ public class SoundManager : HappyUtils.SingletonBehaviour<SoundManager>
 
     public AudioSource _bgmSource;
     public AudioSource _sfxSource;
+    public AudioSource _ambienceSource;
 
     [SerializeField] SoundList _Bgms;
     [SerializeField] List<SoundList> _Sfxs;
@@ -15,7 +16,7 @@ public class SoundManager : HappyUtils.SingletonBehaviour<SoundManager>
     public void PlayBGM(string name, float volumeMultiplier = 1f)
     {
         Sound sound = _Bgms.GetSound(name);
-        if(sound == null)
+        if (sound == null)
         {
             Debug.LogError(name + " 음악을 찾을 수 없음!");
             return;
@@ -24,6 +25,19 @@ public class SoundManager : HappyUtils.SingletonBehaviour<SoundManager>
         _bgmSource.clip = sound.Clip;
         _bgmSource.volume = sound.Volume * volumeMultiplier;
         _bgmSource.Play();
+    }
+    public void PlayAmbience(string name, float volumeMultiplier = 1f)
+    {
+        Sound sound = _Bgms.GetSound(name);
+        if (sound == null)
+        {
+            Debug.LogError(name + " 음악을 찾을 수 없음!");
+            return;
+        }
+        _ambienceSource.Stop();
+        _ambienceSource.clip = sound.Clip;
+        _ambienceSource.volume = sound.Volume * volumeMultiplier;
+        _ambienceSource.Play();
     }
     public void StopBGM()
     {
