@@ -13,10 +13,7 @@ MonoBehaviour:
   m_Name: 1
   m_EditorClassIdentifier: 
   TimeScale: 1
-  TimeLimit: 20
+  TimeLimit: 7
   Characters:
-  - {fileID: 21300000, guid: bff5700ee5cbb4847b94455036581f68, type: 3}
-  - {fileID: 21300000, guid: ca1806efeaa8a4743b359254b5346414, type: 3}
-  - {fileID: 21300000, guid: bff5700ee5cbb4847b94455036581f68, type: 3}
-  - {fileID: 21300000, guid: ca1806efeaa8a4743b359254b5346414, type: 3}
-  ObstacleDistanceRange: {x: 900, y: 1300}
+  - {fileID: -1848844473, guid: 6c5c453accfaa81448010b7c59fac4a2, type: 3}
+  ObstacleDistanceRange: {x: 700, y: 1500}

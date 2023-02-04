@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977492279472bed408e69322eee30742, type: 3}
   m_Name: 2
   m_EditorClassIdentifier: 
-  TimeScale: 1.5
-  TimeLimit: 15
-  ColCount: 4
-  InitialShowingTime: 1.5
+  TimeScale: 1
+  TimeLimit: 20
+  ColCount: 3
+  InitialShowingTime: 1

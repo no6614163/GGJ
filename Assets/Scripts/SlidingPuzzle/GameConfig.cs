@@ -8,7 +8,11 @@ namespace SlidingPuzzle
     public enum EmptyPieceType { LeftUp, LeftDown, RightUp, RightDown}
     public class GameConfig : GameConfigBase
     {
-        [SerializeField] GameConfigAsset asset;
+        [SerializeField] GameConfigAsset[] assets;
+        GameConfigAsset asset
+        {
+            get { return assets[GameSystem.Instance.GameLevel]; }
+        }
         public float PieceMoveDuration;
         public Sprite[] Pictures;
         public EmptyPieceType[] EmptyPiecePos;

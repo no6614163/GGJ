@@ -32,7 +32,6 @@ namespace SlidingPuzzle
             cellSize = grid.rect.width / boardSize;
 
 
-            Vector2Int emptyPos;
             if (config.EmptyPiecePos[currentPicture] == EmptyPieceType.LeftDown)
                 emptyPos = new Vector2Int(0, 0);
             else if (config.EmptyPiecePos[currentPicture] == EmptyPieceType.RightDown)
@@ -51,7 +50,6 @@ namespace SlidingPuzzle
                     if (i == emptyPos.y && j == emptyPos.x)
                     {
                         pieces[i][j] = null;
-                        emptyPos = new Vector2Int(j, i);
                         continue;
                     }
                     Sprite sprite = Sprite.Create(config.Pictures[currentPicture].texture, 
@@ -64,7 +62,10 @@ namespace SlidingPuzzle
                     pieces[i][j] = piece;
                 }
             }
-            Shuffle();
+            do
+            {
+                Shuffle();
+            } while (CheckGameClear());
             StartTimer();
 
             currentPicture = (currentPicture + 1) % config.Pictures.Length;
@@ -101,6 +102,7 @@ namespace SlidingPuzzle
                     }
                 }
             }
+
         }
         public override void OnTimerEnd()
         {
@@ -134,6 +136,7 @@ namespace SlidingPuzzle
                     return true;
                 }
             }
+            
             return false;
         }
         void SetClickable(bool clickable)
@@ -149,12 +152,14 @@ namespace SlidingPuzzle
         }
         IEnumerator OnGameClear()
         {
+
+            SoundManager.Instance.PlaySFXPitched("Clear", "SlidingPuzzle", 0.05f);
             foreach (Piece[] p in pieces)
             {
                 foreach (Piece piece in p)
                 {
                     if (piece != null)
-                        StartCoroutine(piece.RemoveBorder(0.5f));
+                        StartCoroutine(piece.RemoveBorder(0.2f));
                 }
             }
             yield return new WaitForSeconds(1f);
@@ -175,6 +180,7 @@ namespace SlidingPuzzle
         }
         IEnumerator MovePiece(Vector2Int from, Vector2Int to, float duration)
         {
+            SoundManager.Instance.PlaySFXToggle("Move", "SlidingPuzzle");
             isPieceMoving = true;
             SetClickable(false);
             Piece piece = pieces[from.y][from.x];

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 1
   m_EditorClassIdentifier: 
   TimeScale: 1
-  TimeLimit: 20
+  TimeLimit: 15
   ColCount: 2
   InitialShowingTime: 1
