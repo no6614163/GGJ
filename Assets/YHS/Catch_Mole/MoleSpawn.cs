@@ -4,11 +4,25 @@ using UnityEngine;
 
 public class MoleSpawn : MonoBehaviour
 {
+    public int level;
     [SerializeField]
     private Mole[] moles;
     [SerializeField]
     private float spawnTime;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        if (level == 1)
+            spawnTime = 1.3f;
+        if (level == 2)
+            spawnTime = 1.1f;
+        if (level == 3)
+            spawnTime = 0.9f;
+        if (level == 4)
+            spawnTime = 0.7f;
+        if (level == 5)
+            spawnTime = 0.5f;
+    }
     void Start()
     {
         StartCoroutine("SpawnMole");
