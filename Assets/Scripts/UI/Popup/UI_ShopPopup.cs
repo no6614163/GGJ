@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
+using DG.Tweening;
 public class UI_ShopPopup : UI_Popup
 {
     enum Texts
@@ -26,6 +26,7 @@ public class UI_ShopPopup : UI_Popup
     {
         Image_Back,
         Image_Food,
+        Image_Setting,
         Image_FoodOutline,
         Image_Deco,
         Image_DecoOutline,
@@ -58,6 +59,7 @@ public class UI_ShopPopup : UI_Popup
         Get<Image>((int)Images.Image_Back).gameObject.BindEvent(OnButtonClickedBack);
         Get<Image>((int)Images.Image_Food).gameObject.BindEvent(OnButtonClickedFood);
         Get<Image>((int)Images.Image_Deco).gameObject.BindEvent(OnButtonClickedDeco);
+        Get<Image>((int)Images.Image_Setting).gameObject.BindEvent(OnButtonClickedSetting);
         SetOffAllOutline();
         SetInit();
         Get<Image>((int)Images.Image_Animals).gameObject.BindEvent(OnButtonClickedAnimals);
@@ -96,8 +98,20 @@ public class UI_ShopPopup : UI_Popup
     void OnButtonClickedBack(PointerEventData evt)
     {
         Debug.Log("Back");
-        UI_Manager.Instance.ClosePopupUI();
+        var rect = transform.GetChild(0).GetComponent<RectTransform>();
+        rect.DOAnchorPosX(-3000, 1.5f).OnComplete(() => UI_Manager.Instance.ClosePopupUI());
+        
     }
+
+    void OnButtonClickedSetting(PointerEventData evt)
+    {
+        Debug.Log("Setting");
+        var popup = UI_Manager.Instance.ShowPopupUI<UI_SettingsPopup>();
+        var rect = popup.transform.GetChild(0).GetComponent<RectTransform>();
+        rect.localScale = Vector3.zero;
+        rect.DOScale(1, 0.5f);
+    }
+
     void OnButtonClickedFood(PointerEventData evt)
     {
         Debug.Log("Food");

@@ -101,7 +101,6 @@ public class GameSystem : Singleton<GameSystem>
 
     void LobbySceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log(scene.buildIndex);
         if(scene.buildIndex == (int)SceneType.Lobby)
         {
             // 로비씬일 경우 만복도와 해피포인트가 0이하인지 체크 해서 게임오버 팝업

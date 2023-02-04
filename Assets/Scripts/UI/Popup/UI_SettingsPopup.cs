@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -45,7 +46,8 @@ public class UI_SettingsPopup : UI_Popup
     {
         Debug.Log("Back");
         Time.timeScale = 1;
-        UI_Manager.Instance.ClosePopupUI();
+        var rect = transform.GetChild(0).GetComponent<RectTransform>();
+        rect.DOScale(0, 0.5f).OnComplete(() => UI_Manager.Instance.ClosePopupUI());
     }
 
     void OnButtonClickedQuit(PointerEventData evt)
