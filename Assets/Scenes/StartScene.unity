@@ -589,6 +589,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4777585673519794485, guid: 8106b86b1089e8f43903b1aa6be191af, type: 3}
+      propertyPath: m_Color.a
+      value: 0.5019608
+      objectReference: {fileID: 0}
     - target: {fileID: 4777585673609649304, guid: 8106b86b1089e8f43903b1aa6be191af, type: 3}
       propertyPath: m_Name
       value: UI_CreditsPopup
@@ -782,6 +786,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8199301030257345620, guid: 10b7ebfcf93a8644baa883db2bee5dcf, type: 3}
+      propertyPath: m_Color.b
+      value: 0.972549
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199301030257345620, guid: 10b7ebfcf93a8644baa883db2bee5dcf, type: 3}
+      propertyPath: m_Color.g
+      value: 0.46274513
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199301030257345620, guid: 10b7ebfcf93a8644baa883db2bee5dcf, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8143154
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10b7ebfcf93a8644baa883db2bee5dcf, type: 3}
 --- !u!1001 &8386034959071378138
@@ -791,6 +807,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2394600740231984470, guid: b852f09681f5a664c881f6d21cabc2ab, type: 3}
+      propertyPath: m_Color.a
+      value: 0.5019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 2394600740534608767, guid: b852f09681f5a664c881f6d21cabc2ab, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2394600740534608767, guid: b852f09681f5a664c881f6d21cabc2ab, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2394600740534608767, guid: b852f09681f5a664c881f6d21cabc2ab, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2394600741202893697, guid: b852f09681f5a664c881f6d21cabc2ab, type: 3}
       propertyPath: m_Name
       value: UI_SettingsPopup
