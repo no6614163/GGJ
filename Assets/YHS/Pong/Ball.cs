@@ -4,8 +4,32 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    public float speed = 30f;
+    public int level;
+    public float speed;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        if(level==1)
+        {
+            speed = 8f;
+        }
+        if(level==2)
+        {
+            speed = 11f;
+        }
+        if(level==3)
+        {
+            speed = 13f;
+        }
+        if(level==4)
+        {
+            speed = 16f;
+        }
+        if(level==5)
+        {
+            speed = 19f;
+        }
+    }
     void Start()
     {
         GetComponent<Rigidbody2D>().velocity = Vector2.right * speed;
