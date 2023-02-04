@@ -100,7 +100,6 @@ public class UI_ShopPopup : UI_Popup
         Debug.Log("Back");
         var rect = transform.GetChild(0).GetComponent<RectTransform>();
         rect.DOAnchorPosX(-3000, 1.5f).OnComplete(() => UI_Manager.Instance.ClosePopupUI());
-        
     }
 
     void OnButtonClickedSetting(PointerEventData evt)
