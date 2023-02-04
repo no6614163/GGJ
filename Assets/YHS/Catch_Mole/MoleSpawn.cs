@@ -12,7 +12,7 @@ public class MoleSpawn : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        level = GameSystem.Instance.GameLevel;
+        level = GameSystem.Instance.GameLevel + 1;
         if (level == 1)
             spawnTime = 1.4f;
         if (level == 2)

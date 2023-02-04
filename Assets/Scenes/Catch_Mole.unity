@@ -492,6 +492,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: mole
       objectReference: {fileID: 0}
+    - target: {fileID: 8302112067713505676, guid: d1d52ec63fa624e44a25fff02dcc8677, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1d52ec63fa624e44a25fff02dcc8677, type: 3}
 --- !u!4 &832370576 stripped
