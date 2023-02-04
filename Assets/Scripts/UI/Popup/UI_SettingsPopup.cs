@@ -44,6 +44,7 @@ public class UI_SettingsPopup : UI_Popup
     void OnButtonClickedBack(PointerEventData evt)
     {
         Debug.Log("Back");
+        Time.timeScale = 1;
         UI_Manager.Instance.ClosePopupUI();
     }
 
@@ -60,20 +61,21 @@ public class UI_SettingsPopup : UI_Popup
     void SetValues()
     {
         // TODO : 사운드 매니저에서 값 받아서 넣어주기
-        //Get<Slider>((int)Sliders.Slider_Effect).value = 1;
-        //Get<Slider>((int)Sliders.Slider_Background).value = 1;
+        Get<Slider>((int)Sliders.Slider_Effect).value = SoundManager.Instance._sfxSource.volume;
+        Get<Slider>((int)Sliders.Slider_Background).value = SoundManager.Instance._bgmSource.volume;
     }
 
     void OnValueChangedEffect(float value)
     {
         // TODO : 사운드매니저를 통해서 사운드 조절
+        SoundManager.Instance._sfxSource.volume = value;
 
     }
 
     void OnValueChangedBackground(float value)
     {
         // TODO : 사운드매니저를 통해서 사운드 조절
-
+        SoundManager.Instance._bgmSource.volume = value;
     }
 
 

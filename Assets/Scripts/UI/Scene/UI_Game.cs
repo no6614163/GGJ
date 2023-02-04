@@ -10,6 +10,11 @@ public class UI_Game : UI_Scene
     enum Texts
     {
         Text_Title,
+        Text_Start,
+        Text_Time,
+        Text_Gold,
+        Text_HappyPoint,
+        Text_FoodPoint,
 
     }
 
@@ -17,13 +22,16 @@ public class UI_Game : UI_Scene
     {
         Image_Time,
         Image_Gold,
-        Image_Settings,
+        Image_Setting,
         Image_Shop,
         Image_Back,
+        Image_Home,
     }
 
     enum Sliders
     {
+        Slider_Happy,
+        Slider_Food,
         Slider_Timer,
     }
 
@@ -33,14 +41,30 @@ public class UI_Game : UI_Scene
         Bind<TMP_Text>(typeof(Texts));
         Bind<Image>(typeof(Images));
         Bind<Slider>(typeof(Sliders));
-
-        Get<Image>((int)Images.Image_Settings).gameObject.BindEvent(OnButtonClickedSettings);
+        
+        SetInit();
+        
+        Get<Image>((int)Images.Image_Setting).gameObject.BindEvent(OnButtonClickedSetting);
 
     }
 
-    void OnButtonClickedSettings(PointerEventData evt)
+    void SetInit()
+    {
+        // TODO : init 할 때 푸드포인트 혹은 해피포인트가 위험하면 팝업 띄우는게 나을듯.
+        Get<TMP_Text>((int)Texts.Text_Time).text = string.Format("Day {0}", GameSystem.Instance.Day);
+        Get<TMP_Text>((int)Texts.Text_Gold).text = GameSystem.Instance.Gold.ToString();
+
+        Get<TMP_Text>((int)Texts.Text_HappyPoint).text = string.Format("{0} / {1}", GameSystem.Instance.HappyPoint, 100);
+        Get<TMP_Text>((int)Texts.Text_FoodPoint).text = string.Format("{0} / {1}", GameSystem.Instance.FoodPoint, 100);
+
+        Get<Slider>((int)Sliders.Slider_Happy).value = GameSystem.Instance.HappyPoint;
+        Get<Slider>((int)Sliders.Slider_Food).value = GameSystem.Instance.FoodPoint;
+    }
+
+    void OnButtonClickedSetting(PointerEventData evt)
     {
         Debug.Log("Settings");
+        Time.timeScale = 0;
         UI_Manager.Instance.ShowPopupUI<UI_SettingsPopup>();
     }
 

@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class UI_FailedPopup : UI_Popup
 {
@@ -18,6 +19,11 @@ public class UI_FailedPopup : UI_Popup
         Text_Stage3,
         Text_Stage4,
         Text_Stage5,
+        Text_StageClear1,
+        Text_StageClear2,
+        Text_StageClear3,
+        Text_StageClear4,
+        Text_StageClear5,
 
     }
 
@@ -39,10 +45,14 @@ public class UI_FailedPopup : UI_Popup
     void PlayAnimation()
     {
         // TODO : 애니메이션 실행
-        //if (success)
-        //    Get<TMP_Text>((int)Texts.Text_Stage + stage).text = string.Format("Stage {0} : {1}", stage, score);
-        //else
-        //    Get<TMP_Text>((int)Texts.Text_Stage + stage).text = string.Format("Stage {0} : Failed", stage, score);
+        int currentStage = GameSystem.Instance.CurrentStage;
+        for (int i = 0; i < 5; i++)
+        {
+            if(i+1 > currentStage)
+                Get<TMP_Text>((int)Texts.Text_Stage + (i+1)).text = string.Format("Stage {0} : Clear", (i+1));
+            else
+                Get<TMP_Text>((int)Texts.Text_Stage + (i + 1)).text = string.Format("Stage {0} : Failed", (i + 1));
+        }
     }
 
     void OnButtonClickedOut(PointerEventData evt)

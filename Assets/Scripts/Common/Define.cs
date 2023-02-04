@@ -23,6 +23,20 @@ public enum SceneType
 public enum ItemType
 {
     Food,
-    Happy,
-    Spawn,
+    Deco,
+    Animal,
+}
+
+public enum AnimalType
+{
+    Goat,
+    Chicken,
+    Sheep,
+    Lambkin,
+    Pig,
+    Cow,
+    Duck,
+    TabbyPig,
+    Chick,
+    Alpaca,
 }
