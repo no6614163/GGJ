@@ -38,6 +38,8 @@ public class UI_Lobby : UI_Scene
     {
         base.Init();
 
+        EventManager.Instance.GameEvent.OnPurchaseRequest += GameEvent_OnPurchaseRequest;
+
         Bind<TMP_Text>(typeof(Texts));
         Bind<Image>(typeof(Images));
         Bind<Slider>(typeof(Sliders));
@@ -52,6 +54,17 @@ public class UI_Lobby : UI_Scene
         Get<Image>((int)Images.Image_Setting).gameObject.BindEvent(OnButtonClickedSettings);
         Get<Image>((int)Images.Image_Shop).gameObject.BindEvent(OnButtonClickedShop);
         
+    }
+
+    void GameEvent_OnPurchaseRequest()
+    {
+        Get<TMP_Text>((int)Texts.Text_Gold).text = GameSystem.Instance.Gold.ToString();
+        
+        Get<TMP_Text>((int)Texts.Text_HappyPoint).text = string.Format("{0} / {1}", GameSystem.Instance.HappyPoint, 100);
+        Get<TMP_Text>((int)Texts.Text_FoodPoint).text = string.Format("{0} / {1}", GameSystem.Instance.FoodPoint, 100);
+
+        Get<Slider>((int)Sliders.Slider_Happy).value = GameSystem.Instance.HappyPoint;
+        Get<Slider>((int)Sliders.Slider_Food).value = GameSystem.Instance.FoodPoint;
     }
 
     void SetInit()

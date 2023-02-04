@@ -35,6 +35,7 @@ public class GameSystem : Singleton<GameSystem>
         CurrentStage = 1;
         HappyPoint = 100;
         FoodPoint = 100;
+        Gold = 10000;
         ScoreArray = new int[Constants.MaxStageCount];
         // NOTE : csv 파일에서 테이블 불러와서 저장
         CurrentSceneType = SceneType.Start;
@@ -56,12 +57,13 @@ public class GameSystem : Singleton<GameSystem>
 
     public void SetHappyPoint(int happyPoint)
     {
-        HappyPoint += happyPoint;
+        HappyPoint = happyPoint + HappyPoint > 100 ? 100 : happyPoint + HappyPoint;
+        
 
     }
     public void SetFoodPoint(int foodPoint)
     {
-        FoodPoint += foodPoint;
+        FoodPoint = foodPoint + FoodPoint > 100 ? 100 : foodPoint + FoodPoint;
     }
     
     public void SetScore(int score)
@@ -72,6 +74,9 @@ public class GameSystem : Singleton<GameSystem>
     public void AddAnimal(AnimalType type)
     {
         // TODO : instantiate animal
+        var go = Instantiate(Resources.Load<GameObject>("Prefabs/Animals/" + type.ToString()));
+        var pos = Random.insideUnitCircle.normalized * 5;
+        go.transform.position = pos;
     }
 
     public void SetNextDay()
