@@ -61,6 +61,14 @@ namespace CardMatch
             if (!Clickable)
                 return;
         }
+        public void OnWrong()
+        {
+            animator.SetTrigger("Wrong");
+        }
+        public void OnCorrect()
+        {
+            animator.SetTrigger("Correct");
+        }
         public void OnClick()
         {
             if (!Clickable)

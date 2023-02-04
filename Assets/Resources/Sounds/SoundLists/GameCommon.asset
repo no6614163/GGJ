@@ -20,3 +20,12 @@ MonoBehaviour:
   - _name: Click
     _clip: {fileID: 8300000, guid: 6392820df352197438e486086037e9da, type: 3}
     _volume: 0.5
+  - _name: Correct
+    _clip: {fileID: 8300000, guid: b49002a66e090469eaf946684e9ef9f0, type: 3}
+    _volume: 0.5
+  - _name: Correct
+    _clip: {fileID: 8300000, guid: d1ca39bea9add498fa1488bcd03219ce, type: 3}
+    _volume: 0.5
+  - _name: Wrong
+    _clip: {fileID: 8300000, guid: 8ccaee31df5254a3f9c60a7990940d66, type: 3}
+    _volume: 0.5

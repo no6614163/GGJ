@@ -640,6 +640,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card
       objectReference: {fileID: 0}
+    - target: {fileID: 3163412861325375386, guid: 0f4a840a8c89df845bce247edbefda67, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3163412861325375389, guid: 0f4a840a8c89df845bce247edbefda67, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -658,7 +662,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3163412861325375389, guid: 0f4a840a8c89df845bce247edbefda67, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3163412861325375389, guid: 0f4a840a8c89df845bce247edbefda67, type: 3}
       propertyPath: m_AnchorMin.x
@@ -666,7 +670,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3163412861325375389, guid: 0f4a840a8c89df845bce247edbefda67, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3163412861325375389, guid: 0f4a840a8c89df845bce247edbefda67, type: 3}
       propertyPath: m_SizeDelta.x
@@ -706,11 +710,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3163412861325375389, guid: 0f4a840a8c89df845bce247edbefda67, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 576
       objectReference: {fileID: 0}
     - target: {fileID: 3163412861325375389, guid: 0f4a840a8c89df845bce247edbefda67, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -432
       objectReference: {fileID: 0}
     - target: {fileID: 3163412861325375389, guid: 0f4a840a8c89df845bce247edbefda67, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -777,7 +781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aef273605b8a5c843910506c7b7fc167, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 3d5e2fc48bdc8a34297382ee6bd24e0b, type: 2}
+  data: {fileID: 11400000, guid: f5b7ce4c9e5ba304383e4ee7ef1206ab, type: 2}
   CardImages:
   - {fileID: -2030953043, guid: 6c5c453accfaa81448010b7c59fac4a2, type: 3}
   - {fileID: -1481021403, guid: 6c5c453accfaa81448010b7c59fac4a2, type: 3}
@@ -794,7 +798,7 @@ MonoBehaviour:
   - {fileID: -1680627640, guid: 6c5c453accfaa81448010b7c59fac4a2, type: 3}
   - {fileID: 1013152656, guid: 6c5c453accfaa81448010b7c59fac4a2, type: 3}
   rowCount: 4
-  CardShowDuration: 0.5
+  CardShowDuration: 0.4
 --- !u!4 &1663775131
 Transform:
   m_ObjectHideFlags: 0
