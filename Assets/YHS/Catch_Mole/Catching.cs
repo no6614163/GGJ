@@ -43,7 +43,6 @@ public class Catching : MonoBehaviour
         time += Time.deltaTime;
         if (time >= TimeLimit)
         {
-            //Time.timeScale = 0;
             Debug.Log("Å¬¸®¾î");
             m_End = true;
             time = 0f;
