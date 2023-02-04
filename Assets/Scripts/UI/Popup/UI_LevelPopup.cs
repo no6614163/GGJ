@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -56,7 +57,13 @@ public class UI_LevelPopup : UI_Popup
     {
         // TODO : 애니메이션들 넣어주면 좋음.
         Debug.Log("Out");
-        UI_Manager.Instance.ClosePopupUI();
+        //UI_Manager.Instance.ClosePopupUI();
+        
+        var rect = transform.GetChild(0).GetComponent<RectTransform>();
+        if (rect.transform.localScale.x < 1)
+            return;
+        rect.DOScale(0, 0.5f).OnComplete(() => UI_Manager.Instance.ClosePopupUI());
+
     }
 
     void OnButtonClickedStart(PointerEventData evt)
@@ -68,14 +75,11 @@ public class UI_LevelPopup : UI_Popup
             var popup = UI_Manager.Instance.ShowPopupUI<UI_WarningPopup>();
             popup.SetText("Please select level");
             // 레벨이 선택이 안된 경우 레벨 선택하라는 팝업 표시
-
         }
         else
         {
             GameSystem.Instance.SetNextDay();
-            // TODO : 랜덤으로 씬 타입 정한 후 게임 시작
-            // TODO : 게임 개수 수정해야됨. 
-            int rand = Random.Range(2, 4);
+            int rand = Random.Range(2, 8);
             GameSystem.Instance.LoadScene(rand);
         }
         //GameSystem.Instance.level
