@@ -22,7 +22,7 @@ namespace CardMatch
                 backAnim.IsAnimAble = value;
             } }
 
-        bool isDesiredFront = false;
+        [SerializeField] bool isDesiredFront = false;
         RectTransform rectTransform;
         public RectTransform RectTransform { get { return rectTransform; } }
         private void Awake()
