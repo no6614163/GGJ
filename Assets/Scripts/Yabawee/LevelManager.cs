@@ -87,13 +87,13 @@ namespace Yabawee
                 if(isWrong)
                 {
                     //TODO : 게임 오버
-                    UI_Manager.Instance.ShowPopupUI<UI_FailedPopup>();
+                    ShowResult(false);
                     yield break;
                 }
                 yield return new WaitForSeconds(config.RoundInterval);
             }
             //게임 클리어
-            UI_Manager.Instance.ShowPopupUI<UI_ClearPopup>();
+            ShowResult(true);
         }
         IEnumerator RoundCoroutine(int round)
         {

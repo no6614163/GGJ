@@ -118,7 +118,7 @@ namespace SlidingPuzzle
         }
         void GameOver()
         {
-            UI_Manager.Instance.ShowPopupUI<UI_FailedPopup>();
+            ShowResult(false);
         }
         public bool OnPieceClicked(Piece piece)
         {
@@ -163,7 +163,7 @@ namespace SlidingPuzzle
                 }
             }
             yield return new WaitForSeconds(1f);
-            UI_Manager.Instance.ShowPopupUI<UI_ClearPopup>();
+            ShowResult(true);
             StopTimer();
         }
         bool CheckGameClear()
