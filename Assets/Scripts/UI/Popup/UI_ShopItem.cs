@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
+using System.Linq;
 
 public class UI_ShopItem : UI_Popup
 {
@@ -32,14 +33,25 @@ public class UI_ShopItem : UI_Popup
         m_Init = true;
     }
 
+    public void SetData(ShopItem data, Sprite sprite)
+    {
+        if (!m_Init)
+            Init();
+
+        m_Item = data;
+        Get<Image>((int)Images.Image_Item).sprite = sprite;
+        Get<TMP_Text>((int)Texts.Text_Name).text = m_Item.ItemName;
+        Get<TMP_Text>((int)Texts.Text_Gold).text = m_Item.Price.ToString();
+
+        Get<Image>((int)Images.Image_Background).gameObject.BindEvent(OnButtonClickedItem);
+    }
+
     public void SetData(ShopItem data)
     {
         if (!m_Init)
             Init();
 
         m_Item = data;
-
-        Get<Image>((int)Images.Image_Item).sprite = Resources.Load<Sprite>("Sprites/" + m_Item.ItemName);
         Get<TMP_Text>((int)Texts.Text_Name).text = m_Item.ItemName;
         Get<TMP_Text>((int)Texts.Text_Gold).text = m_Item.Price.ToString();
 

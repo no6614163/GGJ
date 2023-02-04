@@ -5,8 +5,8 @@ using UnityEngine;
 public class SoundManager : HappyUtils.SingletonBehaviour<SoundManager>
 {
 
-    [SerializeField] AudioSource _bgmSource;
-    [SerializeField] AudioSource _sfxSource;
+    public AudioSource _bgmSource;
+    public AudioSource _sfxSource;
 
     [SerializeField] SoundList _Bgms;
     [SerializeField] List<SoundList> _Sfxs;
