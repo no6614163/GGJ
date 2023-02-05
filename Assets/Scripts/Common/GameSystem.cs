@@ -19,6 +19,8 @@ public class GameSystem : Singleton<GameSystem>
     // TODO : 각 이벤트들 넣어줘야됨.
     public Queue<int> EventQueue;
 
+    public List<GameObject> AnimalPrefabList;
+
 
     void Awake()
     {
@@ -27,6 +29,7 @@ public class GameSystem : Singleton<GameSystem>
         SceneManager.sceneLoaded += LobbySceneLoaded;
         SpecLoader<ShopItem> specLoader = new SpecLoader<ShopItem>("Data/ItemData");
         ShopItems = specLoader.GetAllSpecList();
+        AnimalPrefabList = new List<GameObject>();
     }
 
     void Init()
@@ -37,6 +40,7 @@ public class GameSystem : Singleton<GameSystem>
         Gold = 10000;
         // NOTE : csv 파일에서 테이블 불러와서 저장
         CurrentSceneType = SceneType.Start;
+        AnimalPrefabList.Clear();
     }
 
 
@@ -63,9 +67,11 @@ public class GameSystem : Singleton<GameSystem>
     public void AddAnimal(AnimalType type)
     {
         // TODO : instantiate animal
-        var go = Instantiate(Resources.Load<GameObject>("Prefabs/Animals/" + type.ToString()));
+        var go = Resources.Load<GameObject>("Prefabs/Animals/" + type.ToString());
+        var animal = Instantiate(go);
         var pos = Random.insideUnitCircle.normalized * 5;
-        go.transform.position = pos;
+        animal.transform.position = pos;
+        AnimalPrefabList.Add(go);
     }
 
     public void SetNextDay()
@@ -97,6 +103,15 @@ public class GameSystem : Singleton<GameSystem>
             {
                 InitGameSystem();
                 UI_Manager.Instance.ShowPopupUI<UI_GameFailedPopup>();
+            }
+            else if(AnimalPrefabList.Count > 0)
+            {
+                for (int i = 0; i < AnimalPrefabList.Count; i++)
+                {
+                    var animal = Instantiate(AnimalPrefabList[i]);
+                    var pos = Random.insideUnitCircle.normalized * 5;
+                    animal.transform.position = pos;
+                }
             }
         }
         else if(scene.buildIndex == (int)SceneType.Start)
