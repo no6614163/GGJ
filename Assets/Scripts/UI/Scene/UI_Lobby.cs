@@ -58,7 +58,7 @@ public class UI_Lobby : UI_Scene
         
     }
 
-    void GameEvent_OnPurchaseRequest()
+    void GameEvent_OnPurchaseRequest(int gold)
     {
         Get<TMP_Text>((int)Texts.Text_Gold).text = GameSystem.Instance.Gold.ToString();
         

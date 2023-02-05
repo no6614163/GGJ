@@ -22,10 +22,10 @@ public class GameEvent
     /// <summary>
     /// 아이템 구매한 경우
     /// </summary>
-    public event Action OnPurchaseRequest;
-    public void InvokePurchaseItem()
+    public event Action<int> OnPurchaseRequest;
+    public void InvokePurchaseItem(int gold)
     {
-        OnPurchaseRequest?.Invoke();
+        OnPurchaseRequest?.Invoke(gold);
     }
 
 }

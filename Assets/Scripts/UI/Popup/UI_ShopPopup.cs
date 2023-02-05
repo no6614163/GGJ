@@ -66,8 +66,10 @@ public class UI_ShopPopup : UI_Popup
         SetFoodItems();
         Get<Image>((int)Images.Image_FoodOutline).gameObject.SetActive(true);
     }
-    void GameEvent_OnPurchaseRequest()
+    void GameEvent_OnPurchaseRequest(int gold)
     {
+        EffectManager.Instance.SpawnNumber(Get<TMP_Text>((int)Texts.Text_Gold).rectTransform, gold, Get<TMP_Text>((int)Texts.Text_Gold).rectTransform.anchoredPosition);
+
         Get<TMP_Text>((int)Texts.Text_Gold).text = GameSystem.Instance.Gold.ToString();
         Get<TMP_Text>((int)Texts.Text_HappyPoint).text = string.Format("{0} / {1}", GameSystem.Instance.HappyPoint, 100);
         Get<TMP_Text>((int)Texts.Text_FoodPoint).text = string.Format("{0} / {1}", GameSystem.Instance.FoodPoint, 100);
@@ -99,8 +101,7 @@ public class UI_ShopPopup : UI_Popup
     {
         SoundManager.Instance.PlaySFX("Click", "GameCommon");
         Debug.Log("Back");
-        var rect = transform.GetChild(0).GetComponent<RectTransform>();
-        rect.DOAnchorPosX(-3000, 1.5f).OnComplete(() => UI_Manager.Instance.ClosePopupUI());
+        UI_Manager.Instance.ClosePopupUI();
     }
 
     void OnButtonClickedSetting(PointerEventData evt)
@@ -189,6 +190,6 @@ public class UI_ShopPopup : UI_Popup
             Destroy(m_ShopItems[i].gameObject);
         }
         m_ShopItems.Clear();
-
     }
+
 }
