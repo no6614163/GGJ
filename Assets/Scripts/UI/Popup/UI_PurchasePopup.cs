@@ -72,7 +72,7 @@ public class UI_PurchasePopup : UI_Popup
                     break;
             }
             SoundManager.Instance.PlaySFX("Cash", "UI");
-            EventManager.Instance.GameEvent.InvokePurchaseItem();
+            EventManager.Instance.GameEvent.InvokePurchaseItem(m_Item.Price);
             UI_Manager.Instance.ClosePopupUI();
         }
         else
