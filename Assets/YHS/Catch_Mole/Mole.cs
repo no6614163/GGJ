@@ -93,11 +93,18 @@ public class Mole : MonoBehaviour
             }
             if(transform.position.y<=limitMinY)
             {
-                ChangeState(MoleState.UnderGround);
+                HideMole();
                 obj1.GetComponent<Catch_Mole>().MoleNotHitted();
 
             }
             yield return null;
         }
+    }
+
+    public void HideMole()
+    {
+        if (gameObject.activeSelf)
+            gameObject.SetActive(false);
+        ChangeState(MoleState.UnderGround);
     }
 }

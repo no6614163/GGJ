@@ -26,7 +26,12 @@ public class MoleSpawn : MonoBehaviour
     }
     void Start()
     {
+        for(int i=0;i<4;i++)
+        {
+            moles[i].HideMole();
+        }
         StartCoroutine("SpawnMole");
+        
     }
     
     private IEnumerator SpawnMole()
@@ -40,6 +45,7 @@ public class MoleSpawn : MonoBehaviour
             yield return new WaitForSeconds(spawnTime);
         }
     }
+
 
     // Update is called once per frame
     void Update()
