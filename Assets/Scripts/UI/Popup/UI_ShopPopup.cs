@@ -46,7 +46,6 @@ public class UI_ShopPopup : UI_Popup
 
     public override void Init()
     {
-        // TODO : 처음 세팅은 food
         base.Init();
         m_ShopItems = new List<UI_ShopItem>();
         Bind<TMP_Text>(typeof(Texts));
@@ -64,6 +63,11 @@ public class UI_ShopPopup : UI_Popup
         Get<Image>((int)Images.Image_Animals).gameObject.BindEvent(OnButtonClickedAnimals);
         SetFoodItems();
         Get<Image>((int)Images.Image_FoodOutline).gameObject.SetActive(true);
+    }
+
+    void OnDestroy()
+    {
+        EventManager.Instance.GameEvent.OnPurchaseRequest -= GameEvent_OnPurchaseRequest;
     }
     void GameEvent_OnPurchaseRequest(int gold)
     {

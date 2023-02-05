@@ -57,6 +57,10 @@ public class UI_Lobby : UI_Scene
         Get<Image>((int)Images.Image_Shop).gameObject.BindEvent(OnButtonClickedShop);
         
     }
+    void OnDestroy()
+    {
+        EventManager.Instance.GameEvent.OnPurchaseRequest -= GameEvent_OnPurchaseRequest;
+    }
 
     void GameEvent_OnPurchaseRequest(int gold)
     {
