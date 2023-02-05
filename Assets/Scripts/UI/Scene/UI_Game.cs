@@ -70,11 +70,11 @@ public class UI_Game : UI_Scene
         SoundManager.Instance.PlaySFX("Click", "GameCommon");
         Debug.Log("Settings");
         Time.timeScale = 0;
-        //UI_Manager.Instance.ShowPopupUI<UI_SettingsPopup>();
-        var popup = UI_Manager.Instance.ShowPopupUI<UI_SettingsPopup>();
-        var rect = popup.transform.GetChild(0).GetComponent<RectTransform>();
-        rect.localScale = Vector3.zero;
-        rect.DOScale(1, 0.5f);
+        UI_Manager.Instance.ShowPopupUI<UI_SettingsPopup>();
+        //var popup = UI_Manager.Instance.ShowPopupUI<UI_SettingsPopup>();
+        //var rect = popup.transform.GetChild(0).GetComponent<RectTransform>();
+        //rect.localScale = Vector3.zero;
+        //rect.DOScale(1, 0.5f);
     }
 
     /// <summary>
