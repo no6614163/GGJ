@@ -1239,7 +1239,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Asset4u_HD_47
+      name: hay
       rect:
         serializedVersion: 2
         x: 211
@@ -1293,6 +1293,7 @@ TextureImporter:
     nameFileIdTable:
       Ground2: 21300088
       Asset4u_HD_19: 21300038
+      hay: 21300094
       Asset4u_HD_24: 21300048
       Asset4u_HD_11: 21300022
       rock2: 21300058
@@ -1323,7 +1324,6 @@ TextureImporter:
       rock1: 21300056
       Asset4u_HD_12: 21300024
       Cloud2: 21300068
-      Asset4u_HD_47: 21300094
       Tree2: 21300066
       Asset4u_HD_10: 21300020
       Asset4u_HD_13: 21300026
