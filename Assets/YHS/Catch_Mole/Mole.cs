@@ -103,8 +103,8 @@ public class Mole : MonoBehaviour
 
     public void HideMole()
     {
+        ChangeState(MoleState.UnderGround);
         if (gameObject.activeSelf)
             gameObject.SetActive(false);
-        ChangeState(MoleState.UnderGround);
     }
 }

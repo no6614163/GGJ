@@ -25,4 +25,4 @@ MonoBehaviour:
     _volume: 0.5
   - _name: end
     _clip: {fileID: 8300000, guid: 0cd1bc0d07db1724d80b321e8c3b28e3, type: 3}
-    _volume: 0.26
+    _volume: 0.09
